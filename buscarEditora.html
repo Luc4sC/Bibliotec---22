@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Editora</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+           <a href="buscarlivro.html"> <img src="imagens/LOGObibliotecBranco.png" id="logoNavbar" name="logoNavbar"> </a>
+        </div>
+    </header>
+    
+    <div class="menu">
+        <div class="opcoes">
+            <a href="buscarlivro.html" class="opcao">Inicio</a>
+            <div class="cadastrarItens">
+                <a href="#" id="cadastrarItens" class="opcao">Cadastrar </a>
+                <div class="itensCadastrar">
+                    <a href="cadastrarAutor.html" id="itens">Autor</a>
+                    <a href="cadastrarCategoria.html" id="itens">Categoria</a>
+                    <a href="cadastrarEditora.html" id="itens">Editora</a>
+                    <a href="cadastrarExemplar.html" id="itens">Exemplar</a>
+                    <a href="cadastrarGenero.html" id="itens">Gênero</a>
+                    <a href="cadastrarLivro.html" id="itens">Livro</a>                    
+                </div>
+            </div>
+
+             <a href="requisicoes.html" class="opcao">Requisições</a>
+             <a href="buscarEditora.html" class="opcao">Editoras</a>
+             <a href="usuario.html" class="opcao">Usuários</a>
+             
+            <div class="logout">
+                <a href="login.html" id="logout"> Logout </a>
+            </div>
+        </div>
+    </div>
+
+    <main id="main" class="main">
+        <section class="secao">
+            <div class="cadastros">
+                <h1 id="tituloForm">Buscar Editora</h1>
+                <hr>
+                <form id="dados">
+                    <article class="colunaForm">
+                    <label for="nome">Razão Social:</label>
+                    <input type="text" id="nome" class="campo">
+    
+                    <input type="submit" id="buscar" value="buscar" class="botao">
+    
+                    </article>
+    
+                    <article class="colunaForm">
+                    </article>
+    
+                </form>
+            </div>
+        </section>
+
+        <section class="secao">
+        <div class="dados" id="dados">  
+
+            <div id="dadosEditora" class="dadosEditora">
+                <div id="imagemEditora" class="imagemEditora">
+                    <img id="imagem" src="imagens/editora.png">
+                </div>
+
+                <div id="informacoesEditora" class="informacoes">
+                
+                <div id="nomesEditora">
+                    <p id="nomeEditora" class="informacaoEditora">Rocco</p>
+                    <p id="razaoEditora" class="informacaoEditora"> Rocco CO.</p>
+                </div>
+
+                <div id="enderecoEditora">
+                    <p id="tituloCampo" class="tituloCampo">Endereço:</p>
+                    <p id="informacaoEditora" class="informacaoEditora">Rua Irani 95A, Vila Silviania, Carapicuíba, CEP: 06321-590</p>
+                </div>
+                
+                <div id="cnpj">
+                    <p id="tituloCampo" class="tituloCampo">CNPJ:</p>
+                    <p id="informacaoEditora" class="informacaoEditora"> 1254987/00018</p>
+                </div>
+
+                <div class="contatoEditora" id="contatoEditora">
+                    <p id="tituloCampo" class="tituloCampo">E-mail: </p>
+                    <p id="informacaoEditora" class="informacaoEditora">rocco@gmail.com</p>
+                    <p id="tituloCampo" class="tituloCampo">Telefone:</p>
+                    <p id="informacaoEditora" class="informacaoEditora">(11)4002-8922</p>
+                </div>
+                
+                </div>
+            </div>
+
+        </div>
+        </section>
+        </main>
+</body>

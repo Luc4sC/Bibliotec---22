@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requisição</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+           <a href="buscarlivro.html"> <img src="imagens/LOGObibliotecBranco.png" id="logoNavbar" name="logoNavbar"> </a>
+        </div>
+    </header>
+    
+    <div class="menu">
+        <div class="opcoes">
+            <a href="buscarlivro.html" class="opcao">Inicio</a>
+            <div class="cadastrarItens">
+                <a href="#" id="cadastrarItens" class="opcao">Cadastrar </a>
+                <div class="itensCadastrar">
+                    <a href="cadastrarAutor.html" id="itens">Autor</a>
+                    <a href="cadastrarCategoria.html" id="itens">Categoria</a>
+                    <a href="cadastrarEditora.html" id="itens">Editora</a>
+                    <a href="cadastrarExemplar.html" id="itens">Exemplar</a>
+                    <a href="cadastrarGenero.html" id="itens">Gênero</a>
+                    <a href="cadastrarLivro.html" id="itens">Livro</a>                    
+                </div>
+            </div>
+
+             <a href="requisicoes.html" class="opcao">Requisições</a>
+             <a href="buscarEditora.html" class="opcao">Editoras</a>
+             <a href="usuario.html" class="opcao">Usuários</a>
+             
+            <div class="logout">
+                <a href="login.html" id="logout"> Logout </a>
+            </div>
+        </div>
+
+    </div>
+
+    <main id="main" class="main">
+        <section class="secao">
+            <div class="cadastros">
+                <h1 id="tituloForm">Efetuar Requisição</h1>
+                <hr>
+                <form id="dados">
+                    <article class="colunaForm">
+                    <label for="usuario">Usuário:</label>
+                    <input type="text" id="usuario" class="campo">
+    
+                    <label for="livro1">Livro 1:</label>
+                    <input type="text" id="livro1" class="campo">
+    
+                    <label for="livro2">Livro 2:</label>
+                    <input type="text" id="livro2" class="campo"> 
+    
+                    <label for="livro3">Livro 3:</label>
+                    <input type="text" id="livro3" class="campo">
+    
+                    <input type="submit" id="cadastrar" value="cadastrar" class="botao">
+    
+                    </article>
+    
+                    <article class="colunaForm">
+                    <label for="dataRequisicao">Data da Requisição:</label>
+                    <input type="text" id="dataRequisicao" class="campo">
+                    
+                    <label for="exemplar1">Exemplar 1:</label>
+                    <input type="text" id="exemplar1" class="campo">
+    
+                    <label for="exemplar2">Exemplar 2:</label>
+                    <input type="text" id="exemplar2" class="campo">
+    
+                    <label for="exemplar3">Exemplar 3:</label>
+                    <input type="text" id="exemplar3" class="campo">
+
+                    </article>
+    
+                </form>
+            </div>
+        </section>
+    </main>
+
+</body>

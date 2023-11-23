@@ -1,0 +1,512 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+
+/* Página de Login Inicio */
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.loginDiv{
+    /* background-color: black; */
+    width: 100%;
+    height: 100%;
+    padding: 8% 0 0;
+    text-align: center;
+    margin: auto;
+}
+
+.logoLogin{
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+#logoForm{
+    width: 20%;
+}
+
+.loginForm{
+    position: relative;
+    z-index: 1;
+    background: #F1F1F1;
+    max-width: 30%;
+    margin: auto;
+    padding: 3%;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 4px;
+  }
+
+.loginForm #campo{
+    font-family: "Poppins", sans-serif;
+    outline: 0;
+    background: #fff;
+    width: 70%;
+    border: 2px solid #cecece;
+    margin-bottom: 5%;
+    padding: 2%;
+    box-sizing: border-box;
+    font-size: 100%;
+    border-radius: 4px;
+}
+
+.loginForm #logar {
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #F0772D;
+    width: 70%;
+    border-radius: 4px;
+    border: 0;
+    padding: 3%;
+    color: #FFFFFF;
+    font-size: 100%;
+    margin-top: 5%;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+  }
+
+  /* Página de Login Fim */
+
+header{
+    position: fixed;
+    background: #F0772D;
+    width: 100%;
+    height: 7%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 20;
+}
+
+#logoNavbar{
+    position: relative;
+    width: 25%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    left: 2%;
+}
+
+.menu{
+    position: fixed;
+    width: 10%;
+    top: 7%;
+    height: 93%;
+    /* margin-top: 70px;
+    padding-top: 25px; */
+    left: 0;
+    font-size: larger;
+    background: #F0772D;
+    z-index: 10;    
+}
+
+.opcoes a{
+    color: #fff;
+    display: block;
+    font-size: 90%;
+    width: 100%;
+    padding-left: 10%;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin-bottom: 10%;
+}
+
+.opcoes .opcao:hover{
+    background-color: #FFFFFF;
+    color: #F0772D;
+}
+
+.cadastrarItens:hover .itensCadastrar {
+    display: block;
+}
+
+.itensCadastrar{
+    display: none;
+    background-color: #F0772D;
+
+}
+
+.itensCadastrar #itens{
+    display: block;
+    font-size: 90%;
+    width: 100%;
+    padding-left: 20%;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin-bottom: 10%;
+}
+
+.itensCadastrar #itens:hover{
+    background-color: #FFFFFF;
+    color: #F0772D; 
+}
+
+.opcoes .logout{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.opcoes .logout #logout {
+    display: block;
+    font-size: 90%;
+    width: 100%;
+    padding-left: 10%;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin-bottom: 10%;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Formulários */
+
+.cadastros {
+    box-sizing: border-box;
+    /* position: absolute; */
+    width: 80%;
+    /* height: 87%; */
+    margin-left: 15%;
+    margin-top: 5%;
+    background: #F1F1F1;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    margin-bottom: 2%;
+}
+
+#tituloForm {
+    font-style: normal;
+    /* font-weight: 600; */
+    font-size: 120%;
+    padding-left: 2%;
+    /* line-height: 25px; */
+    /* padding: 16px 0px 0px 26px; */
+    padding-top: 1.5%;
+}
+
+.cadastros #dados{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    /* margin-left: 20%; */
+    padding-left: 2%;
+    /* max-width: 100%; */
+}
+
+#dados .colunaForm{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 2%;
+    /* margin-left: 10px; */
+    /* background-color: blue; */
+    align-items: flex-start;
+    /* margin-top: -20px; */
+}
+
+.colunaForm label{
+    /* width: 100%; */
+    margin-bottom: 1%;
+}
+
+.colunaForm .campo{
+    /* width: 500;
+    border-radius: 10px;
+    border: 2px solid #666; */
+    padding: 0.8%;
+    width: 70%;
+    border: 2px solid #d8cccc;
+    outline: #F0772D;
+    border-radius: 4px;
+    transition: 600ms ease-in-out;
+    margin-bottom: 1.5%;
+    background: #FFFFFF;
+}
+
+.colunaForm .campoSelect{
+    /* width: 500;
+    border-radius: 10px;
+    border: 2px solid #666; */
+    padding: 0.75%;
+    width: 72%;
+    border: 2px solid #d8cccc;
+    outline: #F0772D;
+    border-radius: 4px;
+    transition: 600ms ease-in-out;
+    margin-bottom: 1.5%;
+    background: #FFFFFF;
+}
+
+.colunaForm .campoSelect:focus{
+    border: 2px solid #F0772D;
+}
+
+.colunaForm .campo:focus{
+    border: 2px solid #F0772D;
+}
+
+.colunaForm .botao{
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    outline: 0;
+    background: #F0772D;
+    margin-top: 3.5%;
+    margin-bottom: 5%;
+    width: 30%;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    font-size: 100%;
+    border: 0;
+    border-radius: 4px;
+    padding: 0.5%;
+}
+
+/* Resultado da chamada */
+
+.lista{
+    box-sizing: border-box;
+    /* position: relative; */
+    width: 80%;
+    /* height: 87%; */
+    margin-left: 15%;
+    /* top: 11%; */
+    background: #F1F1F1;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+}
+
+.tabela{
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    /* border: solid black; */
+    width: 100%;
+    /* background-color: blueviolet; */
+}
+
+.headTabela .linha{
+    width: 100%;
+    margin-left: 5%;
+    font-weight: 600;
+    /* background-color: blue; */
+}
+
+.tabela .headTabela .campoTabela{
+    font-weight: 600;
+    width: 20%;
+    padding-left: 2%;
+    padding-top: 2%;
+}
+
+.tabela .linha{
+    width: 100%;
+    margin-left: 5%;
+}
+
+.tabela .dado{
+    /* padding: 10px 20px 10px 20px; */
+    /* background-color: gold; */
+    padding-left: 2%;
+    padding-top: 2%;
+    padding-bottom: 1%;
+    font-weight: 400;
+    width: 20%;
+}
+
+/* Editora */
+.dados{
+    box-sizing: border-box;
+    width: 80%;
+    margin-left: 15%;
+    margin-bottom: 2%;
+    background: #F1F1F1;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dados #imagemEditora{
+    width:25%;
+}
+
+.dados #imagemEditora #imagem{
+    width: 100%;
+}
+
+.dadosEditora{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* margin-top: 2%; */
+    /* margin-left: 10px; */
+    /* background-color: blue; */
+    align-items: flex-start;
+    /* margin-top: -20px; */
+}
+
+.informacoes{
+    font-family: "Poppins", sans-serif;
+    margin-left: 2%;
+    width: 100%;
+}
+
+.dadosEditora #informacoesEditora #nomeEditora{
+    font-weight: 600;
+    font-size: 200%;
+    margin-bottom: -1%;
+    margin-top: 1.5%;
+    width: 100%;
+    margin-left: -0.2%;
+}
+
+.dadosEditora #informacoesEditora #razaoEditora{
+    margin-top: 0%;
+    margin-left: 0%;
+}
+
+.dadosEditora #informacoesEditora #enderecoEditora{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 0%;
+}
+
+.dadosEditora #informacoesEditora #tituloCampo{
+    padding-right: 1%;
+    margin-top: 0%;
+    font-weight: 600;
+}
+
+.dadosEditora #informacoesEditora #informacaoEditora{
+    padding-right: 1%;
+    margin-top: 0%;
+}
+
+.dadosEditora #informacoesEditora #cnpj{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 0%;
+}
+
+#contatoEditora{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 0%;
+}
+
+/* Livro */ 
+
+.dados #imagemLivro{
+    width:25%;
+}
+
+.dados #imagemLivro #imagem{
+    width: 100%;
+}
+
+.dadosLivro{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.dadosLivro #tituloLivro #titulo{
+    font-weight: 600;
+    font-size: 200%;
+    margin-bottom: -1%;
+    margin-top: 1.5%;
+    width: 100%;
+    margin-left: -0.2%;
+}
+
+.dadosLivro #tituloLivro #subtitulo{
+    margin-top: 0%;
+    margin-left: 0%;
+}
+
+#livro{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start;
+}
+
+#livro #colunaLivro{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-top: 2%;
+    align-items: flex-start;
+}
+
+#livro #colunaLivro #informacao{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#livro #colunaLivro #informacao #tituloCampo{
+    padding-right: 1.5%;
+    margin-top: 0%;
+    font-weight: 600;
+}
+
+#livro #colunaLivro #informacao #informacaoLivro{
+    padding-right: 0%;
+    margin-top: 0%;
+}
+
+/* Usuário */
+
+.usuario{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.usuario #colunaUsuario{
+    display: flex;
+    flex-direction: column;
+    width: 32%;
+    margin-top: 0%;
+    align-items: flex-start;
+}
+
+.usuario #colunaUsuario #informacao{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.usuario #colunaUsuario #informacao #titulo{
+    text-align: center;
+    font-size: 120%;
+    font-weight: 600;
+    margin-bottom: 0%;
+}
+
+.usuario #colunaUsuario #informacao #dado{
+    text-align: center;
+    font-weight: 600;
+    margin-top: 0%;
+}
