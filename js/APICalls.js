@@ -1,77 +1,111 @@
+// function imageToByteArray(imageFile) {
+//   var reader = new FileReader();
+//   let bytes;
+
+//     // Lê o conteúdo da imagem como uma sequência de bytes
+//     reader.readAsArrayBuffer(imageFile);
+
+//   // Evento disparado quando a leitura do arquivo estiver concluída
+//   reader.onloadend = function () {
+//       // Obtém os bytes como um array
+//       bytes = new Uint8Array(reader.result);
+      
+//       // Chama a função de retorno de chamada com o array de bytes
+//       // callback(bytes);
+//   };
+
+//   return bytes
+// }
+
+function imagemBase64(input, callback) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+          if (e.target && e.target.result) {
+              var base64Image = e.target.result;
+              base64Image.trim();
+              base64Image = base64Image.replace(/^data:image\/[a-z]+;base64,/, '');
+              
+              console.log(base64Image);
+
+              // Chame a função de callback com a imagem codificada em Base64
+              callback(base64Image);
+          } else {
+              console.error('Resultado da leitura indefinido ou nulo.');
+          }
+      };
+
+      reader.readAsDataURL(input.files[0]);
+  } else {
+      console.error('Nenhum arquivo selecionado.');
+  }
+}
+
 function criarRequisicaoLivro(){
 
     event.preventDefault()
 
-    let url = "http://localhost:8080/livro/cadastrar"
+    let imagemForm = document.getElementById("imagemLivro");
 
-    let titulo = document.getElementById("tituloLivro").value;
-    let subtitulo = document.getElementById("subtituloLivro").value;
-    let categoria = document.getElementById("categoriaLivro").value;
-    let genero = document.getElementById("generoLivro");
-    let isbn = document.getElementById("isbnLivro").value;
-    let numeroPaginas = document.getElementById("paginasLivro").value;
-    let autor = document.getElementById("autorLivro");
-    let data = document.getElementById("dataLivro").value;
-    let imagem = document.getElementById("imagemLivro").files[0];
+    // Forneça uma função de retorno de chamada para receber a imagem codificada em Base64
+    imagemBase64(imagemForm, function (imagem) {
+        console.log(imagem);
 
-    console.log(titulo)
-    console.log(subtitulo)
-    console.log(isbn)
-    console.log(numeroPaginas)
-    console.log(data)
+        // Continue com o restante do código que depende da imagem
+        // Restante do código...
+        let url = "http://localhost:8080/livro/cadastrar"
 
-    body = {"titulo": titulo, 
-    "subtitulo": subtitulo, 
-    "categoria": categoria,
-    "genero": genero,
-    "isbn": isbn,
-    "numeroPaginas": numeroPaginas,
-    "autor":autor,
-    "data": data
-    }
+        let titulo = document.getElementById("tituloLivro").value;
+        let subtitulo = document.getElementById("subtituloLivro").value;
+        let categoria = document.getElementById("categoriaLivro").value;
+        let genero = document.getElementById("generoLivro").value;
+        let isbn = document.getElementById("isbnLivro").value;
+        let numeroPaginas = document.getElementById("paginasLivro").value;
+        let autor = document.getElementById("autorLivro").value;
+        let data = document.getElementById("dataLivro").value;
+        let editora = document.getElementById("editoraLivro").value;
+        
+        console.log(titulo)
+        console.log(subtitulo)
+        console.log(isbn)
+        console.log(numeroPaginas)
+        console.log(data)
+        console.log(genero)
+        console.log(editora)
+        console.log(autor)
+        console.log(categoria)
+        console.log(imagem)
+    
+        body = {"titulo": titulo, 
+        "subtitulo": subtitulo, 
+        "categoria": categoria,
+        "genero": genero,
+        "editora" : editora,
+        "isbn": isbn,
+        "numeroPaginas": numeroPaginas,
+        "autor":autor,
+        "imagemBase64": imagem,
+        "data": data
+        }
+    
+        cadastrarLivro(url, body)
+    });
 
-    let livro = JSON.stringify(body)
 
-    cadastrarLivro(url, livro, imagem)
 }
 
-function cadastrarLivro(url, livro, imagem){
-    let requisicao = new FormData()
+function cadastrarLivro(url, livro){
+    let request = new XMLHttpRequest()
+    request.open("POST", url, true)
+    request.setRequestHeader("Content-Type", "application/json")
+    request.send(JSON.stringify(livro))
 
-    requisicao.append("arquivo", imagem)
-    requisicao.append("dadosLivro",livro )
+    request.onload = function(){
+        console.log(this.responseText)
+    }
 
-  //   return $.ajax({
-  //     url: url,
-  //     type: "POST",
-  //     processData: false,
-  //     contentType: false,
-  //     data: requisicao,
-  //     success: function(data) {
-  //         console.log(data);
-  //     },
-  //     error: function(error) {
-  //         console.error(error);
-  //     }
-  // });
-
-    return fetch(url, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Accept': 'application/json',
-      },
-        body: requisicao,
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    
-    // return this.responseText
+    return this.responseText
 }
 
 //Definir os valores dos Selects
@@ -151,7 +185,7 @@ function criaOpcaoAutor(autor){
   console.log(autor)
 
   novaOpcao = document.createElement("option")
-  novaOpcao.value = autor
+  novaOpcao.value = autor.nomeArtistico
   novaOpcao.text = autor.nomeArtistico
 
   return novaOpcao
@@ -161,7 +195,7 @@ function criaOpcaoGenero(genero){
   console.log(genero)
 
   novaOpcao = document.createElement("option")
-  novaOpcao.value = genero
+  novaOpcao.value = genero.nome
   novaOpcao.text = genero.nome
 
   return novaOpcao
@@ -171,7 +205,7 @@ function criaOpcaoCategoria(categoria){
   console.log(categoria)
 
   novaOpcao = document.createElement("option")
-  novaOpcao.value = categoria
+  novaOpcao.value = categoria.nome
   novaOpcao.text = categoria.nome
 
   return novaOpcao
@@ -181,7 +215,7 @@ function criaOpcaoEditora(editora){
   console.log(editora)
 
   novaOpcao = document.createElement("option")
-  novaOpcao.value = editora
+  novaOpcao.value = editora.nomeFantasia
   novaOpcao.text = editora.nomeFantasia
 
   return novaOpcao
