@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliotec</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/editora.js"></script>
+    <link rel="icon" href="image/favicon.png" type="image/png" >
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+     <!-- Menu lateral -->
+     <div class="sidebar">
+        <div class="logo-details">
+            <img src="image/LOGObibliotecBranco.png" alt="Logo">
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="inicio.html">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name">Inicio</span>
+                </a>
+            </li>
+            <li>
+                <div class="icon-link">
+                    <a href="#">
+                        <i class='bx bx-plus-circle'></i>
+                       <span class="link_name">Cadastrar</span>
+                    </a>
+                    <i class='bx bx-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a href="livro.html">Livro</a></li>
+                    <li><a href="editora.html">Editora</a></li>
+                    <li><a href="Autor.html">Autor</a></li>
+                    <li><a href="categoria.html">Categoria</a></li>
+                    <li><a href="genero.html">Gênero</a></li>
+                    <li><a href="exemplar.html">Exemplar</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="requisicao.html">
+                    <i class='bx bx-transfer-alt'></i>
+                    <span class="link_name">Requisições</span>
+                </a>
+            </li>
+            <li>
+                <a href="usuarios.html">
+                    <i class='bx bx-group'></i>
+                    <span class="link_name">Usuários</span>
+                </a>
+            </li>
+            <li id="log-out">
+                <a href="index.html">
+                    <i class='bx bx-log-out'></i>
+                    <span class="link_name">Sair</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Fim do menu lateral -->
+
+    <!--Cabeçalho fixo-->
+     <header>
+        <div class="right">
+            <input type="text" placeholder="Pesquisar">
+            <button type="submit" class="SuperiorBusca">
+                <ion-icon name="search-outline"></ion-icon>
+            </button>
+      </header>
+    <!-- Fim do Cabeçalho -->
+
+    <!-- Informações da Pagina-->
+    <main>
+      <div class="container">
+        <h3>Cadastro de Editoras</h3>
+        <hr>
+        <section class="formCadastro">
+            <form id="Form1" action="" method="post">
+                <article id="espaco" class="colunaCadastro">
+
+                    <div class="campo">
+                        <label for="nomeFantasiaEditora">Nome Fantasia:</label>
+                        <input type="text" id="nomeFantasiaEditora">
+                    </div>
+
+                    <div class="campo">
+                        <label for="razaoSocialEditora">Razão Social:</label>
+                        <input type="text" id="razaoSocialEditora">
+                    </div>
+
+                    <div class="campo">
+                        <label for="cnpjEditora">CNPJ:</label>
+                        <input type="text" id="cnpjEditora">
+
+                    </div>
+
+                    <div class="campo">
+                        <label for="emailEditora">Email:</label>
+                        <input type="email" id="emailEditora">
+                    </div>
+
+                    <div class="campo">
+                        <label for="telefoneEditora">Telefone:</label>
+                        <input type="tel" id="telefoneEditora" name="phone" placeholder="99999-9999" pattern="[0-9]{5}-[0-9]{4}" required>
+                    </div>
+
+                    <div class="botoes">
+                        <button class="btn3" type="submit" onclick=criarBodyEditora()>
+                            <ion-icon name="save-outline"></ion-icon>
+                            Cadastrar
+                        </button>
+
+                        <button class="btn2" type="reset">
+                            <ion-icon name="add-outline" class="plusIcon"></ion-icon>
+                               Novo
+                        </button>
+                    </div>
+
+                </article>
+
+                <article class="colunaCadastro">
+
+                    <div class="campo">
+                        <label for="cepEditora">CEP:</label>
+                        <input type="text" id="cepEditora">
+                    </div>
+
+                    <div class="campo">
+                        <label for="logradouroEditora">Logradouro:</label>
+                        <input type="text" id="logradouroEditora">
+                    </div>
+
+                    <div class="campo">
+                        <label for="numeroEditora">Número:</label>
+                        <input type="number" min="0" id="numeroEditora">
+                    </div>
+                    
+                    <div class="campo">
+                        <label for="bairroEditora">Bairro:</label>
+                        <input type="text" id="bairroEditora">
+                    </div>
+
+                    <div class="campo">
+                        <label for="cidadeEditora">Cidade:</label>
+                        <input type="text" id="cidadeEditora">
+                    </div>
+                </article>
+            </form>
+         </section>
+       </div>
+       <div class="container">
+        <table class="table" id="tabela">
+          </table>
+       </div>
+    </main>
+    
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e)=>{
+              
+        let arrowParent = e.target.parentElement.parentElement;
+        console.log(arrowParent);
+        arrowParent.classList.toggle("showMenu");
+            });
+        }
+    </script>
+</body>
+</html>

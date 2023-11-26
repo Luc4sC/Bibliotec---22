@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bibliotec</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/autor.js"></script>
     <link rel="icon" href="image/favicon.png" type="image/png" >
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -74,73 +75,64 @@
     <!-- Informações da Pagina-->
     <main>
       <div class="container">
-        <h3>Requisições de livro</h3>
+        <h3>Cadastro de Autor</h3>
         <hr>
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Usuário:</th>
-                    <th scope="col">Livro:</th>
-                    <th scope="col">Situação:</th>
-                  </tr>
-                </thead>
+        <section class="formCadastro">
+            <form id="Form1" action="" method="post">
+                <article id="espaco" class="colunaCadastro" >
+
+                    <div class="campo">
+                        <label for="nomeAutor">Nome:</label>
+                        <input type="text" id="nomeAutor">
+                    </div>
+
+                    <div class="campo">
+                        <label for="nomeArtisticoAutor">Nome Artistico:</label>
+                        <input type="text" id="nomeArtisticoAutor">
+                    </div>
+                    <div class="botoes">
+                    <button class="btn3" type="submit" onclick=criarBodyAutor()>
+                        <ion-icon name="save-outline"></ion-icon>
+                        Cadastrar
+                    </button>
+
+                        <button class="btn2" type="reset">
+                            <ion-icon name="add-outline" class="plusIcon"></ion-icon>
+                            Novo
+                        </button>
+                </div>
+                </article>
+
+                <article class="colunaCadastro">
+
+                    <div class="campo">
+                        <label for="dataNascAutor">Data de Nascimento:</label>
+                        <input type="date" id="dataNascAutor">
+                    </div>
+                </article>
+
                 
-                <tbody>
-                  <tr>
-                    <td>Lucas Lucco</td>
-                    <td>Alice no pais das maravilhas</td>
-                    <td>11/01/1200</td>
-                    <td><a href="efetuacao.html">ver</a></td>
-                  </tr>
-                  <tr>
-                    <td>Jhonata Cafu</td>
-                    <td>Harry Potter</td>
-                    <td>01/33/1133</td>
-                    <td><a href="efetuacao.html">ver</a></td>
-                  </tr>
-                  <tr>
-                    <td>Minnie Molusca</td>
-                    <td>Aquele mesmo</td>
-                    <td>21/12/2121</td>
-                    <td><a href="efetuacao.html">ver</a></td>
-                  </tr>
-                  <tr>
-                    <td>Minnie Molusca</td>
-                    <td>Aquele mesmo</td>
-                    <td>21/12/2121</td>
-                    <td><a href="efetuacao.html">ver</a></td>
-                  </tr>
-                  <tr>
-                    <td>Minnie Molusca</td>
-                    <td>Aquele mesmo</td>
-                    <td>21/12/2121</td>
-                    <td><a href="efetuacao.html">ver</a></td>
-                  </tr>
-                  <tr>
-                    <td>Minnie Molusca</td>
-                    <td>Aquele mesmo</td>
-                    <td>21/12/2121</td>
-                    <td><a href="efetuacao.html">ver</a></td>
-                  </tr>
-                  
-                </tbody>
-              </table>
+            </form>
+         </section>
+       </div>
+       <div class="container">
+        <table class="table" id="tabela">
+        </table>
        </div>
     </main>
     
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
     <script>
-      let arrow = document.querySelectorAll(".arrow");
-      for (var i = 0; i < arrow.length; i++) {
-          arrow[i].addEventListener("click", (e)=>{
-            
-      let arrowParent = e.target.parentElement.parentElement;
-      console.log(arrowParent);
-      arrowParent.classList.toggle("showMenu");
-          });
-      }
-  </script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e)=>{
+              
+        let arrowParent = e.target.parentElement.parentElement;
+        console.log(arrowParent);
+        arrowParent.classList.toggle("showMenu");
+            });
+        }
+    </script>
 </body>
 </html>

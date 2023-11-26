@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliotec</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="image/favicon.png" type="image/png" >
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- Menu lateral -->
+    <div class="sidebar">
+        <div class="logo-details">
+            <img src="image/LOGObibliotecBranco.png" alt="Logo">
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="inicio.html">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name">Inicio</span>
+                </a>
+            </li>
+            <li>
+                <div class="icon-link">
+                    <a href="#">
+                        <i class='bx bx-plus-circle'></i>
+                       <span class="link_name">Cadastrar</span>
+                    </a>
+                    <i class='bx bx-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a href="livro.html">Livro</a></li>
+                    <li><a href="editora.html">Editora</a></li>
+                    <li><a href="Autor.html">Autor</a></li>
+                    <li><a href="categoria.html">Categoria</a></li>
+                    <li><a href="genero.html">Gênero</a></li>
+                    <li><a href="exemplar.html">Exemplar</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="requisicao.html">
+                    <i class='bx bx-transfer-alt'></i>
+                    <span class="link_name">Requisições</span>
+                </a>
+            </li>
+            <li>
+                <a href="usuarios.html">
+                    <i class='bx bx-group'></i>
+                    <span class="link_name">Usuários</span>
+                </a>
+            </li>
+            <li id="log-out">
+                <a href="index.html">
+                    <i class='bx bx-log-out'></i>
+                    <span class="link_name">Sair</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Fim do menu lateral -->
+
+    <!--Cabeçalho fixo-->
+     <header>
+        <div class="right">
+            <input type="text" placeholder="Pesquisar">
+            <button type="submit" class="SuperiorBusca">
+                <ion-icon name="search-outline"></ion-icon>
+            </button>
+      </header>
+    <!-- Fim do Cabeçalho -->
+    
+    <!-- Informações da Pagina-->
+    <main>
+    <!-- Div de inserir informações  -->
+      <div class="container">
+        <h3>Busca de Livros</h3>
+        <hr>
+           <section class="formCadastro">
+               <form id="Form1" action="" method="post">
+                    <article class="colunaCadastro">
+    
+                        <div class="campo">
+                            <label for="RM">ISBN:</label>
+                            <input type="text" id="RM">
+                        </div>
+                            <div class="botoes">
+                              <button class="btn1" type="submit">
+                              <ion-icon name="search-outline"></ion-icon>
+                            Buscar
+                        </button>
+
+                        <button class="btn2" type="submit">
+                            <ion-icon name="add-outline" class="plusIcon"></ion-icon>
+                            <a href="cadastrarLivro.html">Novo</a> 
+                        </button>
+                         </div>
+                    </article>
+    
+                    
+                </form>
+             </section> 
+      </div>
+       <div class="container">
+          <div class="dados">  
+    
+             <div id="dadosLivro" class="dadosLivro">
+                <div class="imagemLivro">
+                    <img src="image/favicon.png">
+                </div>
+
+                <div class="livro">
+
+                    <article class="colunaLivro">
+                    <div class="informacao">
+                        <h4>ISBN:</h4>
+                        <p>15236-8</p>
+                    </div>
+
+                    <div class="informacao">
+                        <h4>Título:</h4>
+                        <p>270 páginas</p>
+                    </div>
+
+                    <div class="informacao">
+                        <h4>Subtítulo:</h4>
+                        <p>Romance</p>
+                    </div>
+
+                    <div class="informacao"> 
+                        <h4>Autor:</h4>
+                        <p>Ficcção Científica</p>
+                    </div>
+
+                    </article>
+
+                    <article class="colunaLivro">
+                        <div class="informacao">
+                            <h4>Gênero:</h4>
+                            <p>Ficcção Científica</p>
+                        </div>
+
+                        <div class="informacao">
+                            <h4>Categoria:</h4>
+                            <p>Rocco</p>
+                        </div>
+
+                        <div class="informacao">
+                            <h4>Data:</h4>
+                            <p>17/03/2014</p>
+                        </div>
+
+                        <div class="informacao">
+                            <h4>Editora:</h4>
+                            <p>17/03/2014</p>
+                        </div>
+                    </article>
+                </div>                 
+              </div>
+            </div>
+
+        </div>
+    </main>
+    
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e)=>{
+              
+        let arrowParent = e.target.parentElement.parentElement;
+        console.log(arrowParent);
+        arrowParent.classList.toggle("showMenu");
+            });
+        }
+    </script>
+</body>
+</html>

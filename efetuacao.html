@@ -73,74 +73,81 @@
 
     <!-- Informações da Pagina-->
     <main>
-      <div class="container">
-        <h3>Requisições de livro</h3>
-        <hr>
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Usuário:</th>
-                    <th scope="col">Livro:</th>
-                    <th scope="col">Situação:</th>
-                  </tr>
-                </thead>
-                
-                <tbody>
-                  <tr>
-                    <td>Lucas Lucco</td>
-                    <td>Alice no pais das maravilhas</td>
-                    <td>11/01/1200</td>
-                    <td><a href="efetuacao.html">ver</a></td>
-                  </tr>
-                  <tr>
-                    <td>Jhonata Cafu</td>
-                    <td>Harry Potter</td>
-                    <td>01/33/1133</td>
-                    <td><a href="efetuacao.html">ver</a></td>
-                  </tr>
-                  <tr>
-                    <td>Minnie Molusca</td>
-                    <td>Aquele mesmo</td>
-                    <td>21/12/2121</td>
-                    <td><a href="efetuacao.html">ver</a></td>
-                  </tr>
-                  <tr>
-                    <td>Minnie Molusca</td>
-                    <td>Aquele mesmo</td>
-                    <td>21/12/2121</td>
-                    <td><a href="efetuacao.html">ver</a></td>
-                  </tr>
-                  <tr>
-                    <td>Minnie Molusca</td>
-                    <td>Aquele mesmo</td>
-                    <td>21/12/2121</td>
-                    <td><a href="efetuacao.html">ver</a></td>
-                  </tr>
-                  <tr>
-                    <td>Minnie Molusca</td>
-                    <td>Aquele mesmo</td>
-                    <td>21/12/2121</td>
-                    <td><a href="efetuacao.html">ver</a></td>
-                  </tr>
-                  
-                </tbody>
-              </table>
-       </div>
+        <div class="container">
+            <h3>Efetuar requisição</h3>
+            <hr>
+            <section class="formCadastro">
+                <form id="Form1" action="" method="post">
+                    <article id="espaco" class="colunaCadastro">
+    
+                        <div class="campo">
+                            <label for="usuarioEfetuacao">Usuario:</label>
+                            <select id="usuarioEfetuacao"></select>
+                        </div>
+    
+                        <div class="campo">
+                            <label for="razaoSocialEditora">Livro:</label>
+                            <select id="razaoSocialEditora"></select>
+                        </div>
+    
+                        <div class="campo">
+                            <label for="cnpjEditora">Numeração do exemplar:</label>
+                            <input type="text" id="cnpjEditora">
+                        </div>
+
+                        <div class="botoes">
+                            <button class="btn1" type="submit" id="aceitar">
+                                <ion-icon name="checkmark-outline"></ion-icon>
+                                Aceitar
+                            </button>
+        
+                            <button class="btn1" type="submit" id="negar">
+                                <ion-icon name="close-outline"></ion-icon>
+                                Negar 
+                            </button>
+
+                            <button class="btn1" type="submit" id="finalizar">
+                                <ion-icon name="checkmark-outline"></ion-icon>
+                                Finalizar
+                            </button>
+                        </div>
+                    </article>
+    
+                    <article class="colunaCadastro">
+    
+                        <div class="campo">
+                            <label for="enderecoEditora">Data da requisição:</label>
+                            <input type="date" id="enderecoEditora">
+                        </div>
+    
+                        <div class="campo">
+                            <label for="emailEditora">Data da efetuação:</label>
+                            <input type="date" id="emailEditora">
+                        </div>
+    
+                    </article>
+                </form>
+             </section>
+           </div>
+           <div class="infos">
+            
+           </div>
+
+        
     </main>
     
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
     <script>
-      let arrow = document.querySelectorAll(".arrow");
-      for (var i = 0; i < arrow.length; i++) {
-          arrow[i].addEventListener("click", (e)=>{
-            
-      let arrowParent = e.target.parentElement.parentElement;
-      console.log(arrowParent);
-      arrowParent.classList.toggle("showMenu");
-          });
-      }
-  </script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e)=>{
+              
+        let arrowParent = e.target.parentElement.parentElement;
+        console.log(arrowParent);
+        arrowParent.classList.toggle("showMenu");
+            });
+        }
+    </script>
 </body>
 </html>
