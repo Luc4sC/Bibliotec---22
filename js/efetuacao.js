@@ -40,25 +40,77 @@ function putEfetuacao(url, body){
     return this.responseText
 }
 
+function getExemplares(isbn){
+    buscaExemplares = get("http://localhost:8080/exemplar/buscar/" + encodeURIComponent(isbn))
+
+    exemplares = JSON.parse(buscaExemplares)
+
+
+}
+
 function getLivro(isbn){
     buscaLivro = get("http://localhost:8080/livro/buscar/" + encodeURIComponent(isbn))
 
     livro = JSON.parse(buscaLivro)
 }
 
+function getUser(rm){
+    buscaUser = get("http://localhost:8080/livro/buscar/" + encodeURIComponent(rm))
+
+    user = JSON.parse(buscaUser)
+}
+
+
+
+function criaOpcaoLivro(livro){
+    console.log(livro)
+  
+    novaOpcao = document.createElement("option")
+    novaOpcao.value = livro.titulo + " " + livro.subtitulo
+    novaOpcao.text = livro.isbn
+  
+    return novaOpcao
+}
+
+function criaOpcaoUser(user){
+    console.log(user)
+  
+    novaOpcao = document.createElement("option")
+    novaOpcao.value = user.userName
+    novaOpcao.text = user.ra
+  
+    return novaOpcao
+}
+
+function getEditoras(){
+    buscaEditoras = get("http://localhost:8080/editora/buscar")
+  
+    //Transforma JSON para JS
+    editoras = JSON.parse(buscaEditoras);
+  
+    let seletor = document.getElementById("editoraLivro");
+  
+    editoras.forEach(element => {
+     let opcao = criaOpcaoEditora(element);
+     seletor.add(opcao)
+     });
+  
+    console.log(editoras)
+  }
+
 //Chama Funções ao Iniciar A Página
 document.addEventListener("DOMContentLoaded", function() {
     livroRequisicao = getLivro(localStorage.getItem('isbn'))
+    usuarioRequisicao = getUser(localStorage.getItem('rmRequisicao'))
 
-    let usuario = document.getElementById("usuarioEfetuacao");
-    let livro = document.getElementById("livro")
+    let seletorLivro = document.getElementById("livro")
+    let seletorUser = document.getElementById("usuarioEfetuacao")
     let dataRequisicao = document.getElementById("dataRequisicao")
 
-    usuario.textContent =  localStorage.getItem('rmRequisicao')
-    usuario.value = localStorage.getItem('rmRequisicao')
-
-    livro.textContent =  livroRequisicao.titulo + " " + livroRequisicao.subtitulo
-    livro.value = livroRequisicao.isbn
+    opcaoLivro = criaOpcaoLivro(livroRequisicao)
+    opcaoUser = criaOpcaoLivro(usuarioRequisicao)
+    seletorLivro.add(opcaoLivro)
+    seletorUser.add(opcaoUser)
 
     dataRequisicao.value = localStorage.getItem('dataRequisicao')
 });

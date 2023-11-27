@@ -53,7 +53,7 @@ function criarLinha(emprestimo){
     //Definindo os valores dos elementos
     link.href = "efetuaco.html";
     link.value = emprestimo.dataRequisicao
-    link.id = emprestimo.usuario.ra
+    link.id = emprestimo.usuario.userName
     link.className = emprestimo.livro.isbn
     link.onclick =function() {
         salvarRequisicao(this.value, this.id, this.className);
