@@ -90,10 +90,10 @@ function criarBodyGenero(){
 
     body = {"nomeGenero" : nome}
 
-    postCategoria(url, body)
+    postGenero(url, body)
 }
 
-function postCategoria(url, body){
+function postGenero(url, body){
     let request = new XMLHttpRequest()
     request.open("POST", url, true)
     request.setRequestHeader("Content-Type", "application/json")

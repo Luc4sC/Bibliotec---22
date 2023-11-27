@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bibliotec</title>
+    <script src="js/livro.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="image/favicon.png" type="image/png" >
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -91,18 +92,18 @@
                     </div>
 
                     <div class="campo">
-                        <label for="isnbLivro">Isbn:</label>
-                        <input type="text" id="isnbLivro">
+                        <label for="isbnLivro">Isbn:</label>
+                        <input type="text" id="isbnLivro">
                     </div>
 
                     <div class="campo">
                         <label for="categoriaLivro">Categoria:</label>
-                        <select id="categoriaLivro"></select>
+                        <select id="categoriaLivro"><option>--Selecionar Categoria--</option></select>
                     </div>
 
                     <div class="campo">
                         <label for="generoLivro">Gênero:</label>
-                        <select id="generoLivro"></select>
+                        <select id="generoLivro"><option>--Selecionar Gênero</option></select>
                      </div>
                     <div class="campo">
                         <label for="sinopseLivro">Sinopse:</label>
@@ -110,38 +111,38 @@
                     </div>
 
                     <div class="botoes">
-                        <button class="btn3" type="submit">
+                        <button class="btn3" type="submit" onclick=criarBodyLivro()>
                             <ion-icon name="save-outline"></ion-icon>
                             Cadastrar
                         </button>
     
-                        <a href="cadastrarLivro.html">
-                            <button class="btn2" type="submit">
-                                <ion-icon name="add-outline" class="plusIcon"></ion-icon>
-                                <a href="cadastrarLivro.html">Novo</a> 
-                            </button>
+                        
+                        <button class="btn2" type="reset">
+                            <ion-icon name="add-outline" class="plusIcon"></ion-icon>
+                            Novo
+                        </button>
                     </div>
                 </article>
 
                 <article class="colunaCadastro">
                     <div class="campo">
-                        <label for="paginasLivro">Idioma:</label>
-                        <input type="text" id="linguaLivro">
+                        <label for="idiomaLivro">Idioma:</label>
+                        <input type="text" id="idiomaLivro">
                     </div>
 
                     <div class="campo">
                         <label for="autorLivro">Autor:</label>
-                        <select id="autorLivro"></select>
+                        <select id="autorLivro"><option>--Selecionar Autor--</option></select>
                     </div>
 
                     <div class="campo">
                         <label for="editoraLivro">Editora:</label>
-                        <select id="editoraLivro"></select>
+                        <select id="editoraLivro"><option>--Selecionar Editora--</option></select>
                     </div>
 
 
                     <div class="campo">
-                        <label for="imgLivro">Data:</label>
+                        <label for="dataLivro">Data:</label>
                         <input type="date" id="dataLivro">
                     </div>
 
@@ -158,46 +159,9 @@
             </form>
          </section>
        </div>
+
        <div class="container">
-        <table class="table">
-            <thead>
-              <tr>
-                <th id="vazio3"></th>
-                <th>Título:</th>
-                <th>Autor:</th>
-                <th>ISBN:</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td scope="row">
-                    <button class="delete" type="submit">
-                    <ion-icon name="trash-outline"></ion-icon>
-                 </button></td>
-                <td>Harry Potter</td>
-                <td>Pedra Filosofal</td>
-                <td>Pedra Filosofal</td>
-              </tr>
-              <tr>
-                <td scope="row">
-                    <button class="delete" type="submit">
-                    <ion-icon name="trash-outline"></ion-icon>
-                 </button></td>
-                <td>Suspence</td>
-                <td>Romance</td>
-                <td>Pedra Filosofal</td>
-              </tr>
-              <tr>
-                <td scope="row">
-                    <button class="delete" type="submit">
-                    <ion-icon name="trash-outline"></ion-icon>
-                 </button></td>
-                <!-- <td colspan="2">Larry the Bird</td> -->
-                <td>Categoria</td>
-                <td>99/99/9999</td>
-                <td>Pedra Filosofal</td>
-              </tr>
-            </tbody>
+        <table class="table" id="tabela">
           </table>
        </div>
 

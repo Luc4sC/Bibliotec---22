@@ -82,17 +82,17 @@
     
                         <div class="campo">
                             <label for="usuarioEfetuacao">Usuario:</label>
-                            <select id="usuarioEfetuacao"></select>
+                            <input type="text" id="usuarioEfetuacao" readonly></input>
                         </div>
     
                         <div class="campo">
-                            <label for="razaoSocialEditora">Livro:</label>
-                            <select id="razaoSocialEditora"></select>
+                            <label for="livro">Livro:</label>
+                            <input type="text" id="livro" readonly></input>
                         </div>
     
                         <div class="campo">
-                            <label for="cnpjEditora">Numeração do exemplar:</label>
-                            <input type="text" id="cnpjEditora">
+                            <label for="numExemplar">Numeração do exemplar:</label>
+                            <input type="number" id="numExemplar" min="0">
                         </div>
 
                         <div class="botoes">
@@ -116,13 +116,8 @@
                     <article class="colunaCadastro">
     
                         <div class="campo">
-                            <label for="enderecoEditora">Data da requisição:</label>
-                            <input type="date" id="enderecoEditora">
-                        </div>
-    
-                        <div class="campo">
-                            <label for="emailEditora">Data da efetuação:</label>
-                            <input type="date" id="emailEditora">
+                            <label for="dataRequisicao">Data da requisição:</label>
+                            <input type="date" id="dataRequisicao" readonly>
                         </div>
     
                     </article>

@@ -415,9 +415,8 @@ thead tr #vazio3{
 }
 tbody td{
     /* font-weight: 500; */
-    margin-top: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     /* background-color: gold; */
 }
 td a{
