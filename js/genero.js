@@ -57,7 +57,6 @@ function criarLinha(genero){
     botao.onclick =function() {
         deleteGenero(this.id);
     };
-    // "clickTeclado(this.value);"
 
     tdBotao.appendChild(botao);
     tdBotao.scope = "row";

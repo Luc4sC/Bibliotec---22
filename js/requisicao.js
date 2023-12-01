@@ -21,7 +21,7 @@ function getEmprestimos(){
     bodyTabela = document.createElement("tbody")
 
     headUsuario.innerHTML = "Usuário";
-    headULivro.innerHTML = "Livro";
+    headLivro.innerHTML = "Livro";
     headSituacao.innerHTML = "Situação";
 
     headLinha.appendChild(headUsuario)
@@ -37,34 +37,46 @@ function getEmprestimos(){
         bodyTabela.appendChild(linha);
         });
     
-       console.log(emprestimos)
+    console.log(emprestimos)
 }
 
 function criarLinha(emprestimo){
     //Criando elementos no HTML
     linha = document.createElement("tr");
     link = document.createElement("a");
-    icon = document.createElement("ion-icon");
     tdLink = document.createElement("td");
     tdUsuario = document.createElement("td");
     tdLivro = document.createElement("td");
     tdSituacao = document.createElement("td");
 
     //Definindo os valores dos elementos
-    link.href = "efetuaco.html";
-    link.value = emprestimo.dataRequisicao
-    link.id = emprestimo.usuario.userName
+    link.href = "efetuacao.html";
+    link.text = "Ver";
+    link.name = emprestimo.dataRequisicao
+    link.id = emprestimo.usuario.ra
     link.className = emprestimo.livro.isbn
-    link.onclick =function() {
-        salvarRequisicao(this.value, this.id, this.className);
-    };
+    link.addEventListener("click", function (event) {
+        event.preventDefault();
+    
+        // Obtém os valores apropriados dos atributos do link
+        let dataRequisicao = this.name;
+        let rmRequisicao = this.id;
+        let isbn = this.className;
+    
+        // Chama a função salvarRequisicao com os valores corretos
+        salvarRequisicao(dataRequisicao, rmRequisicao, isbn);
+    
+        // Redireciona para a próxima página se necessário
+        window.location.href = this.getAttribute("href");
+    });
 
-    tdLink.appendChild(link);
+    // tdLink.appendChild(link);
 
     tdUsuario.innerHTML = emprestimo.usuario.userName
     tdLivro.innerHTML = emprestimo.livro.titulo + " " + emprestimo.livro.subtitulo
-    tdSituacao.innerHTML = emprestimo.status
-    tdLink.innerHTML = "Ver" 
+    tdSituacao.innerHTML = emprestimo.statusPedido
+    tdLink.innerHTML
+    tdLink.appendChild(link)
 
     //Inserindo elementos na Tabela
     linha.appendChild(tdUsuario)
@@ -75,16 +87,10 @@ function criarLinha(emprestimo){
     return linha;
 }
 
-function salvarRequisicao(dataRequisicao, rmRequisicao, isbn){
-
-    //Salva informações para próxima página
-    let a = document.getElementById(rmRequisicao);
-
-    a.addEventListener("click", function () {
-        localStorage.setItem("dataRequisicao", dataRequisicao);
-        localStorage.setItem("rmRequisicao", rmRequisicao);
-        localStorage.setItem("isbn", isbn);
-    })
+function salvarRequisicao(dataRequisicao, rmRequisicao, isbn) {
+    localStorage.setItem("dataRequisicao", dataRequisicao);
+    localStorage.setItem("rmRequisicao", rmRequisicao);
+    localStorage.setItem("isbn", isbn);
 }
 
 //Chama Funções ao Iniciar A Página

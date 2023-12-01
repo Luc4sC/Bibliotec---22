@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bibliotec</title>
+    <script src="js/usuarios.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="image/favicon.png" type="image/png" >
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -80,14 +81,14 @@
                     <article class="colunaCadastro">
     
                         <div class="campo">
-                            <label for="RM">RM:</label>
-                            <input type="text" id="RM">
+                            <label for="rm">RM:</label>
+                            <input type="text" id="rm">
                         </div>
                             <div class="botoes">
-                              <button class="btn1" type="submit">
+                              <button class="btn1" type="submit" onclick=buscarRM(event)>
                               <ion-icon name="search-outline"></ion-icon>
-                            Buscar
-                        </button>
+                                Buscar
+                              </button>
                          </div>
                     </article>
                 </form>
@@ -97,27 +98,8 @@
 
     <!-- Div de puxar informações  -->
       <div class="container">
-        <table class="table">
-            <thead>
-              <tr>
-                <th>Nome:</th>
-                <th>Email:</th>
-                <th>RM:</th>
-                <!-- <th scope="col"></th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Rodrigo</td>
-                <td>Rodrigo@geam.aosm</td>
-                <td>38190</td>
-                <td>
-                    <button class="delete" type="submit">
-                    <ion-icon name="ban-outline"></ion-icon>
-                 </button></td>
-              </tr>
-            </tbody>
-          </table>
+        <table class="table" id="tabelaUsuario">
+        </table>
        </div>
     <!-- Fim da Div de puxar informações  -->
 
@@ -126,67 +108,6 @@
         <hr>
 
             <table id="table2">
-                <thead>
-                  <tr>
-                    <th>ISBN:</th>
-                    <th>Numeração:</th>
-                    <th>Data da efetuação:</th>
-                    <th>Situação:</th>
-                  </tr>
-                </thead>
-                
-                <tbody>
-                  <tr>
-                    <td>Lucas Lucco</td>
-                    <td>Lucas Lucco</td>
-                    <td>11/01/1200</td>
-                    <td>Devolvido</td>
-                    <!-- <th><a href="efetuacao.html">ver</a></th> -->
-                    
-                  </tr>
-                  <tr>
-                    <td>Jhonata Cafu</td>
-                    <td>Lucas Lucco</td>
-                    <td>01/33/1133</td>
-                    <td>Devolvido</td>
-                    
-                    <!-- <th><a href="efetuacao.html">ver</a></th> -->
-                  </tr>
-                  <tr>
-                    <td>Minnie Molusca</td>
-                    <td>Lucas Lucco</td>
-                    <td>21/12/2121</td>
-                    <td>Devolvido</td>
-                    
-                    <!-- <th><a href="efetuacao.html">ver</a></th> -->
-                  </tr>
-                  <tr>
-                    <td>Minnie Molusca</td>
-                    <td>Lucas Lucco</td>
-                    <td>21/12/2121</td>
-                    <td>Devolvido</td>
-                    
-                    <!-- <th><a href="efetuacao.html">ver</a></th> -->
-                  </tr>
-                  <tr>
-                    <td>Minnie Molusca</td>
-                    <td>Lucas Lucco</td>
-                    <td>21/12/2121</td>
-                    <td>Em aberto</td>
-                    
-                    <!-- <th><a href="efetuacao.html">ver</a></th> -->
-                  </tr>
-                  <tr>
-                    <td>Minnie Molusca</td>
-                    <td>Lucas Lucco</td>
-                    <td>21/12/2121</td>
-                    <td>Devolvido</td>
-                    
-                    
-                    <!-- <th><a href="efetuacao.html">ver</a></th> -->
-                  </tr>
-                  
-                </tbody>
               </table>
        </div>
     </main>

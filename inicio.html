@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bibliotec</title>
+    <script src="js/inicio.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="image/favicon.png" type="image/png" >
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -78,22 +79,22 @@
         <h3>Busca de Livros</h3>
         <hr>
            <section class="formCadastro">
-               <form id="Form1" action="" method="post">
+               <form id="Form1" >
                     <article class="colunaCadastro">
     
                         <div class="campo">
-                            <label for="RM">ISBN:</label>
-                            <input type="text" id="RM">
+                            <label for="isbn">ISBN:</label>
+                            <input type="text" id="isbn">
                         </div>
-                            <div class="botoes">
-                              <button class="btn1" type="submit">
-                              <ion-icon name="search-outline"></ion-icon>
+                        <div class="botoes">
+                        <button class="btn1" type="submit" onclick=buscar(event)>
+                         <ion-icon name="search-outline"></ion-icon>
                             Buscar
                         </button>
 
-                        <button class="btn2" type="submit">
-                            <ion-icon name="add-outline" class="plusIcon"></ion-icon>
-                            <a href="cadastrarLivro.html">Novo</a> 
+                        <button class="btn2" type="reset">
+                        <ion-icon name="add-outline" class="plusIcon"></ion-icon>
+                            Novo
                         </button>
                          </div>
                     </article>
@@ -107,7 +108,7 @@
     
              <div id="dadosLivro" class="dadosLivro">
                 <div class="imagemLivro">
-                    <img src="image/favicon.png">
+                    <img id="img" src="">
                 </div>
 
                 <div class="livro">
@@ -115,22 +116,22 @@
                     <article class="colunaLivro">
                     <div class="informacao">
                         <h4>ISBN:</h4>
-                        <p>15236-8</p>
+                        <p id="infoISBN"></p>
                     </div>
 
                     <div class="informacao">
                         <h4>Título:</h4>
-                        <p>270 páginas</p>
+                        <p id="infoTitulo"></p>
                     </div>
 
                     <div class="informacao">
-                        <h4>Subtítulo:</h4>
-                        <p>Romance</p>
+                        <h4>Idioma:</h4>
+                        <p id="infoSubtitulo"></p>
                     </div>
 
                     <div class="informacao"> 
                         <h4>Autor:</h4>
-                        <p>Ficcção Científica</p>
+                        <p id="infoAutor"></p>
                     </div>
 
                     </article>
@@ -138,22 +139,22 @@
                     <article class="colunaLivro">
                         <div class="informacao">
                             <h4>Gênero:</h4>
-                            <p>Ficcção Científica</p>
+                            <p id="infoGenero"></p>
                         </div>
 
                         <div class="informacao">
                             <h4>Categoria:</h4>
-                            <p>Rocco</p>
+                            <p id="infoCategoria"></p>
                         </div>
 
                         <div class="informacao">
                             <h4>Data:</h4>
-                            <p>17/03/2014</p>
+                            <p id="infoData"></p>
                         </div>
 
                         <div class="informacao">
                             <h4>Editora:</h4>
-                            <p>17/03/2014</p>
+                            <p id="infoEditora"></p>
                         </div>
                     </article>
                 </div>                 

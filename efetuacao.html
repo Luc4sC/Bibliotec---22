@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bibliotec</title>
+    <script src="js/efetuacao.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="image/favicon.png" type="image/png" >
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -82,33 +83,33 @@
     
                         <div class="campo">
                             <label for="usuarioEfetuacao">Usuario:</label>
-                            <input type="text" id="usuarioEfetuacao" readonly value="Lucas Coelho"></input>
+                            <select id="usuarioEfetuacao"> </select>
                         </div>
     
                         <div class="campo">
                             <label for="livro">Livro:</label>
-                            <select id="livro"><option>--ISBN--</option></select>
+                            <select id="livro"></select>
                         </div>
     
                         <div class="campo">
-                            <label for="numExemplar">Numeração do exemplar:</label>
-                            <select></select>
+                            <label for="exemplares">Numeração do exemplar:</label>
+                            <select id="exemplares"></select>
                         </div>
 
                         <div class="botoes">
-                            <button class="btn1" type="submit" id="aceitar">
+                            <button class="btn1" type="submit" id="aceitar" onclick=criarBodyEfetuacao()>
                                 <ion-icon name="checkmark-outline"></ion-icon>
                                 Aceitar
                             </button>
-        
-                            <button class="btn1" type="submit" id="negar">
-                                <ion-icon name="close-outline"></ion-icon>
-                                Negar 
-                            </button>
 
-                            <button class="btn1" type="submit" id="finalizar">
+                            <button class="btn1" type="submit" id="finalizar" onclick=criarBodyFinalizacao()>
                                 <ion-icon name="checkmark-outline"></ion-icon>
                                 Finalizar
+                            </button>
+        
+                            <button class="btn1" type="submit" id="negar" onclick=criarBodyRecusa()>
+                                <ion-icon name="close-outline"></ion-icon>
+                                Negar 
                             </button>
                         </div>
                     </article>
@@ -117,9 +118,14 @@
     
                         <div class="campo">
                             <label for="dataRequisicao">Data da requisição:</label>
-                            <input type="date" id="dataRequisicao" value="2021-10-01" readonly>
+                            <input type="date" id="dataRequisicao" readonly>
                         </div>
     
+                        <div class="campo">
+                            <label for="observacao">Observação:</label>
+                            <input type="text" id="observacao" placeholder="Insira em Casos de Negação ou Finalização">
+                        </div>
+
                     </article>
                 </form>
              </section>
