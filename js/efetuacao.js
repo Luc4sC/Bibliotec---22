@@ -8,8 +8,9 @@ function get(url){
 
 function criarBodyEfetuacao(){
     event.preventDefault()
+    rm = localStorage.getItem("rm")
 
-    let url = "http://localhost:8080/emprestimo/efetuar"
+    let url = "http://localhost:8080/emprestimo/efetuar/" + encodeURI(rm)
 
     let rm = document.getElementById("usuarioEfetuacao").value;
     let isbn = document.getElementById("livro").value;
@@ -43,8 +44,8 @@ function putEfetuacao(url, body) {
 
 function criarBodyFinalizacao(){
     event.preventDefault()
-
-    let url = "http://localhost:8080/emprestimo/finalizar"
+    rm = localStorage.getItem("rm")
+    let url = "http://localhost:8080/emprestimo/finalizar/" + encodeURI(rm)
 
     let rm = document.getElementById("usuarioEfetuacao").value;
     let isbn = document.getElementById("livro").value;
@@ -78,8 +79,8 @@ function putFinalizacao(url, body){
 
 function criarBodyRecusa(){
     event.preventDefault()
-
-    let url = "http://localhost:8080/emprestimo/recusar"
+    rm = localStorage.getItem("rm")
+    let url = "http://localhost:8080/emprestimo/recusar/" + encodeURI(rm)
 
     let rm = document.getElementById("usuarioEfetuacao").value;
     let isbn = document.getElementById("livro").value;

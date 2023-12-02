@@ -47,8 +47,6 @@ function passarDadosLivro(livro){
     console.log(livro.imagemBase64)
     imgLivro.src = "data:image/jpeg;base64," + livro.imagemBase64
 
-    // "data:image/jpeg;base64,
-
     imgLivro.innerHTML;
 }
 

@@ -94,8 +94,9 @@ function limparTabela() {
 
 function criarBodyAutor(){
     event.preventDefault()
+    rm = localStorage.getItem("rm")
 
-    let url = "http://localhost:8080/autor/cadastrar"
+    let url = "http://localhost:8080/autor/cadastrar/" + encodeURI(rm)
 
     let nome = document.getElementById("nomeAutor").value;
     let nomeArtistico = document.getElementById("nomeArtisticoAutor").value;
@@ -131,10 +132,11 @@ function postAutor(url, body){
 }
 
 function deleteAutor(nomeArtistico){
-    let url = "http://localhost:8080/autor/deletar/"
+    rm = localStorage.getItem("rm")
+    let url = "http://localhost:8080/autor/deletar/" + encodeURIComponent(nomeArtistico) + "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
-    request.open("DELETE", url + encodeURIComponent(nomeArtistico))
+    request.open("DELETE", url)
     request.send()
 
     request.onload = function(){
@@ -151,4 +153,4 @@ function deleteAutor(nomeArtistico){
 //Chama Funções ao Iniciar A Página
 document.addEventListener("DOMContentLoaded", function() {
     getAutores();
-  });
+});

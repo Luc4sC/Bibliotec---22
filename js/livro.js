@@ -1,211 +1,181 @@
 function imagemBase64(input, callback) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
   
-        reader.onload = function (e) {
-            if (e.target && e.target.result) {
-                var base64Image = e.target.result;
-                base64Image.trim();
-                base64Image = base64Image.replace(/^data:image\/[a-z]+;base64,/, '');
-                
-                console.log(base64Image);
+    reader.onload = function (e) {
+      if (e.target && e.target.result) {
+        var base64Image = e.target.result;
+        base64Image.trim();
+        base64Image = base64Image.replace(/^data:image\/[a-z]+;base64,/, '');
   
-                // Chame a função de callback com a imagem codificada em Base64
-                callback(base64Image);
-            } else {
-                console.error('Resultado da leitura indefinido ou nulo.');
-            }
-        };
+        // Chame a função de callback com a imagem codificada em Base64
+        callback(base64Image);
+      } 
+      else {
+        console.error('Resultado da leitura indefinido ou nulo.');
+      }
+    };
   
-        reader.readAsDataURL(input.files[0]);
-    } else {
-        console.error('Nenhum arquivo selecionado.');
+    reader.readAsDataURL(input.files[0]);
+    } 
+    
+    else {
+      console.error('Nenhum arquivo selecionado.');
     }
-  }
+}
   
-  function criarBodyLivro(){
+function criarBodyLivro(){
+  event.preventDefault()
+  rm = localStorage.getItem("rm")
+  console.log(rm)
+  let imagemForm = document.getElementById("imgLivro");
   
-      event.preventDefault()
+  imagemBase64(imagemForm, function (imagem) {
+    
+    let url = "http://localhost:8080/livro/cadastrar/" + encodeURI(rm)
   
-      let imagemForm = document.getElementById("imgLivro");
-  
-      // Forneça uma função de retorno de chamada para receber a imagem codificada em Base64
-      imagemBase64(imagemForm, function (imagem) {
-  
-          let url = "http://localhost:8080/livro/cadastrar"
-  
-          let titulo = document.getElementById("tituloLivro").value;
-          let subtitulo = document.getElementById("subtituloLivro").value;
-          let categoria = document.getElementById("categoriaLivro").value;
-          let genero = document.getElementById("generoLivro").value;
-          let isbn = document.getElementById("isbnLivro").value;
-          let numeroPaginas = document.getElementById("paginasLivro").value;
-          let autor = document.getElementById("autorLivro").value;
-          let data = document.getElementById("dataLivro").value;
-          let editora = document.getElementById("editoraLivro").value;
-          let sinopse = document.getElementById("sinopseLivro").value;
-          let idioma = document.getElementById("idiomaLivro").value;
-
-          
-          console.log(titulo)
-          console.log(subtitulo)
-          console.log(isbn)
-          console.log(numeroPaginas)
-          console.log(data)
-          console.log(genero)
-          console.log(editora)
-          console.log(autor)
-          console.log(categoria)
-          console.log(sinopse)
-          console.log(idioma)
-          console.log(imagem)
+    let titulo = document.getElementById("tituloLivro").value;
+    let subtitulo = document.getElementById("subtituloLivro").value;
+    let categoria = document.getElementById("categoriaLivro").value;
+    let genero = document.getElementById("generoLivro").value;
+    let isbn = document.getElementById("isbnLivro").value;
+    let numeroPaginas = document.getElementById("paginasLivro").value;
+    let autor = document.getElementById("autorLivro").value;
+    let data = document.getElementById("dataLivro").value;
+    let editora = document.getElementById("editoraLivro").value;
+    let sinopse = document.getElementById("sinopseLivro").value;
+    let idioma = document.getElementById("idiomaLivro").value;
       
-          body = {"titulo": titulo, 
-          "subtitulo": subtitulo, 
-          "categoria": categoria,
-          "genero": genero,
-          "editora" : editora,
-          "isbn": isbn,
-          "numeroPaginas": numeroPaginas,
-          "autor":autor,
-          "idioma": idioma,
-          "sinopse": sinopse,
-          "imagemBase64": imagem,
-          "data": data
+    body = {"titulo": titulo, 
+            "subtitulo": subtitulo, 
+            "categoria": categoria,
+            "genero": genero,
+            "editora" : editora,
+            "isbn": isbn,
+            "numeroPaginas": numeroPaginas,
+            "autor":autor,
+            "idioma": idioma,
+            "sinopse": sinopse,
+            "imagemBase64": imagem,
+            "data": data
           }
       
           postLivro(url, body)
       });
+}
+  
+function postLivro(url, livro){
+  let request = new XMLHttpRequest()
+  request.open("POST", url, true)
+  request.setRequestHeader("Content-Type", "application/json")
+  request.send(JSON.stringify(livro))
+  
+  request.onload = function(){
+    console.log(this.responseText)
+    alert(this.responseText)
+    limparTabela();
+    getLivros()
   }
   
-  function postLivro(url, livro){
-      let request = new XMLHttpRequest()
-      request.open("POST", url, true)
-      request.setRequestHeader("Content-Type", "application/json")
-      request.send(JSON.stringify(livro))
+  return this.responseText
+}
   
-      request.onload = function(){
-        console.log(this.responseText)
-        alert(this.responseText)
-        limparTabela();
-        getLivros
-      }
-  
-      return this.responseText
-  }
-  
-  //Definir os valores dos Selects
-  function get(url) {
-      let request = new XMLHttpRequest()
-      request.open("GET", url, false)
-      request.send()
+
+function get(url) {
+  let request = new XMLHttpRequest()
+  request.open("GET", url, false)
+  request.send()
       
-      return request.response
-  }
+  return request.response
+}
   
-  function getAutores(){
-     buscaAutores = get("http://localhost:8080/autor/buscar")
+function getAutores(){
+  buscaAutores = get("http://localhost:8080/autor/buscar")
   
-     //Transforma JSON para JS
-     autores = JSON.parse(buscaAutores);
+  //Transforma JSON para JS
+  autores = JSON.parse(buscaAutores);
   
-     let seletor = document.getElementById("autorLivro");
+  let seletor = document.getElementById("autorLivro");
   
-     autores.forEach(autor => {
-      let opcao = criaOpcaoAutor(autor);
-      seletor.add(opcao)
-      });
+  autores.forEach(autor => {
+    let opcao = criaOpcaoAutor(autor);
+    seletor.add(opcao)
+  });
+}
   
-     console.log(autores)
-  }
+function getGeneros(){
+  buscaGeneros = get("http://localhost:8080/genero/buscar")
   
-  function getGeneros(){
-    buscaGeneros = get("http://localhost:8080/genero/buscar")
+  //Transforma JSON para JS
+  generos = JSON.parse(buscaGeneros);
   
-    //Transforma JSON para JS
-    generos = JSON.parse(buscaGeneros);
+  let seletor = document.getElementById("generoLivro");
   
-    let seletor = document.getElementById("generoLivro");
+  generos.forEach(genero => {
+    let opcao = criaOpcaoGenero(genero);
+    seletor.add(opcao)
+    });
+}
   
-    generos.forEach(genero => {
-     let opcao = criaOpcaoGenero(genero);
-     seletor.add(opcao)
-     });
+function getCategorias(){
+  buscaCategorias = get("http://localhost:8080/categoria/buscar")
   
-    console.log(generos)
-  }
+  //Transforma JSON para JS
+  categorias = JSON.parse(buscaCategorias);
   
-  function getCategorias(){
-    buscaCategorias = get("http://localhost:8080/categoria/buscar")
+  let seletor = document.getElementById("categoriaLivro");
   
-    //Transforma JSON para JS
-    categorias = JSON.parse(buscaCategorias);
+  categorias.forEach(element => {
+    let opcao = criaOpcaoCategoria(element);
+    seletor.add(opcao)
+  });
+}
   
-    let seletor = document.getElementById("categoriaLivro");
+function getEditoras(){
+  buscaEditoras = get("http://localhost:8080/editora/buscar")
   
-    categorias.forEach(element => {
-     let opcao = criaOpcaoCategoria(element);
-     seletor.add(opcao)
-     });
+  //Transforma JSON para JS
+  editoras = JSON.parse(buscaEditoras);
   
-    console.log(categorias)
-  }
+  let seletor = document.getElementById("editoraLivro");
   
-  function getEditoras(){
-    buscaEditoras = get("http://localhost:8080/editora/buscar")
+  editoras.forEach(element => {
+    let opcao = criaOpcaoEditora(element);
+    seletor.add(opcao)
+  });
+}
   
-    //Transforma JSON para JS
-    editoras = JSON.parse(buscaEditoras);
+function criaOpcaoAutor(autor){
+  novaOpcao = document.createElement("option")
+  novaOpcao.value = autor.nomeArtistico
+  novaOpcao.text = autor.nomeArtistico
   
-    let seletor = document.getElementById("editoraLivro");
+  return novaOpcao
+}
   
-    editoras.forEach(element => {
-     let opcao = criaOpcaoEditora(element);
-     seletor.add(opcao)
-     });
+function criaOpcaoGenero(genero){
+  novaOpcao = document.createElement("option")
+  novaOpcao.value = genero.nome
+  novaOpcao.text = genero.nome
   
-    console.log(editoras)
-  }
+  return novaOpcao
+}
   
-  function criaOpcaoAutor(autor){
-    console.log(autor)
+function criaOpcaoCategoria(categoria){
+  novaOpcao = document.createElement("option")
+  novaOpcao.value = categoria.nome
+  novaOpcao.text = categoria.nome
   
-    novaOpcao = document.createElement("option")
-    novaOpcao.value = autor.nomeArtistico
-    novaOpcao.text = autor.nomeArtistico
+  return novaOpcao
+}
   
-    return novaOpcao
-  }
+function criaOpcaoEditora(editora){
+  novaOpcao = document.createElement("option")
+  novaOpcao.value = editora.nomeFantasia
+  novaOpcao.text = editora.nomeFantasia
   
-  function criaOpcaoGenero(genero){
-    console.log(genero)
-  
-    novaOpcao = document.createElement("option")
-    novaOpcao.value = genero.nome
-    novaOpcao.text = genero.nome
-  
-    return novaOpcao
-  }
-  
-  function criaOpcaoCategoria(categoria){
-    console.log(categoria)
-  
-    novaOpcao = document.createElement("option")
-    novaOpcao.value = categoria.nome
-    novaOpcao.text = categoria.nome
-  
-    return novaOpcao
-  }
-  
-  function criaOpcaoEditora(editora){
-    console.log(editora)
-  
-    novaOpcao = document.createElement("option")
-    novaOpcao.value = editora.nomeFantasia
-    novaOpcao.text = editora.nomeFantasia
-  
-    return novaOpcao
-  }
+  return novaOpcao
+}
   
 //Definir tabela Livros
 function limparTabela() {
@@ -216,44 +186,43 @@ function limparTabela() {
 }
 
 function getLivros(){
-    buscaLivros = get("http://localhost:8080/livro/buscar")
+  buscaLivros = get("http://localhost:8080/livro/buscar")
  
-    //Transforma JSON para JS
-    livros = JSON.parse(buscaLivros);
+  //Transforma JSON para JS
+  livros = JSON.parse(buscaLivros);
  
-    let tabela = document.getElementById("tabela");
+  let tabela = document.getElementById("tabela");
 
-    headTabela = document.createElement("thead");
-    headLinha = document.createElement("tr");
-    headVazio = document.createElement("th");
-    headTitulo = document.createElement("th");
-    headSubtitulo = document.createElement("th");
-    headISBN = document.createElement("th");
-    bodyTabela = document.createElement("tbody")
+  headTabela = document.createElement("thead");
+  headLinha = document.createElement("tr");
+  headVazio = document.createElement("th");
+  headTitulo = document.createElement("th");
+  headSubtitulo = document.createElement("th");
+  headISBN = document.createElement("th");
+  bodyTabela = document.createElement("tbody")
 
-    headVazio.id = "vazio3";
+  headVazio.id = "vazio3";
 
+  headVazio.innerHTML = "";
+  headTitulo.innerHTML = "Título";
+  headSubtitulo.innerHTML = "Subtitulo";
+  headISBN.innerHTML = "ISBN";
 
-    headVazio.innerHTML = "";
-    headTitulo.innerHTML = "Título";
-    headSubtitulo.innerHTML = "Subtitulo";
-    headISBN.innerHTML = "ISBN";
+  headLinha.appendChild(headVazio)
+  headLinha.appendChild(headTitulo)
+  headLinha.appendChild(headSubtitulo)
+  headLinha.appendChild(headISBN)
 
-    headLinha.appendChild(headVazio)
-    headLinha.appendChild(headTitulo)
-    headLinha.appendChild(headSubtitulo)
-    headLinha.appendChild(headISBN)
-
-    headTabela.appendChild(headLinha)
-    tabela.appendChild(headTabela)
-    tabela.appendChild(bodyTabela)
+  headTabela.appendChild(headLinha)
+  tabela.appendChild(headTabela)
+  tabela.appendChild(bodyTabela)
     
-    livros.forEach(livro => {
-     let linha = criarLinha(livro);
-     bodyTabela.appendChild(linha);
-     });
+  livros.forEach(livro => {
+    let linha = criarLinha(livro);
+    bodyTabela.appendChild(linha);
+  });
  
-    console.log(livros)
+  console.log(livros)
 }
 
 function criarLinha(livro){
@@ -295,28 +264,30 @@ function criarLinha(livro){
 }
 
 function deleteLivro(isbn){
-    let url = "http://localhost:8080/livro/deletar/"
+  rm = localStorage.getItem("rm")
+  let url = "http://localhost:8080/livro/deletar/" + encodeURI(rm)
 
-    let request = new XMLHttpRequest()
-    request.open("DELETE", url + encodeURIComponent(isbn))
-    request.send()
+  let request = new XMLHttpRequest()
+  request.open("DELETE", url + encodeURIComponent(isbn))
+  request.send()
 
-    request.onload = function(){
-        console.log(this.responseText)
-        alert(this.responseText)
-
-        limparTabela();
-        getLivros();
-    }
+  request.onload = function(){
+    console.log(this.responseText)
+    alert(this.responseText)
+    limparTabela();
+    getLivros();
+  }
 
     return this.responseText
 }
 
 
-  document.addEventListener("DOMContentLoaded", function() {
-    getAutores();
-    getGeneros();
-    getCategorias();
-    getEditoras();
-    getLivros();
-  });
+document.addEventListener("DOMContentLoaded", function() {
+  getAutores();
+  getGeneros();
+  getCategorias();
+  getEditoras();
+  getLivros();
+  rm = localStorage.getItem("rm")
+  console.log(rm)
+});

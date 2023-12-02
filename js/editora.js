@@ -93,8 +93,9 @@ function limparTabela() {
 
 function criarBodyEditora(){
     event.preventDefault()
+    rm = localStorage.getItem("rm")
 
-    let url = "http://localhost:8080/editora/cadastrar"
+    let url = "http://localhost:8080/editora/cadastrar/" + encodeURI(rm)
 
     let nomeFantasia = document.getElementById("nomeFantasiaEditora").value;
     let razaoSocial = document.getElementById("razaoSocialEditora").value;
@@ -154,10 +155,11 @@ function postEditora(url, body){
 }
 
 function deleteEditora(nomeFantasia){
-    let url = "http://localhost:8080/editora/deletar/"
+    rm = localStorage.getItem("rm")
+    let url = "http://localhost:8080/editora/deletar/" + encodeURIComponent(nomeFantasia) + "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
-    request.open("DELETE", url + encodeURIComponent(nomeFantasia))
+    request.open("DELETE", url)
     request.send()
 
     request.onload = function(){

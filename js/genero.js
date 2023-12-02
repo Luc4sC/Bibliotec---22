@@ -80,8 +80,8 @@ function limparTabela() {
 
 function criarBodyGenero(){
     event.preventDefault()
-
-    let url = "http://localhost:8080/genero/cadastrar"
+    rm = localStorage.getItem("rm")
+    let url = "http://localhost:8080/genero/cadastrar/" + encodeURI(rm)
 
     let nome = document.getElementById("nomeGenero").value;
 
@@ -110,10 +110,11 @@ function postGenero(url, body){
 }
 
 function deleteGenero(nomeGenero){
-    let url = "http://localhost:8080/genero/deletar/"
+    rm = localStorage.getItem("rm")
+    let url = "http://localhost:8080/genero/deletar/" + encodeURIComponent(nomeGenero) + "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
-    request.open("DELETE", url + encodeURIComponent(nomeGenero))
+    request.open("DELETE", url)
     request.send()
 
     request.onload = function(){

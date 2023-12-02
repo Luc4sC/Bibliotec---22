@@ -35,9 +35,7 @@ function getEmprestimos(){
     emprestimos.forEach(emprestimo => {
         let linha = criarLinha(emprestimo);
         bodyTabela.appendChild(linha);
-        });
-    
-    console.log(emprestimos)
+    });
 }
 
 function criarLinha(emprestimo){

@@ -81,7 +81,8 @@ function limparTabela() {
 function criarBodyCategoria(){
     event.preventDefault()
 
-    let url = "http://localhost:8080/categoria/cadastrar"
+    rm = localStorage.getItem("rm")
+    let url = "http://localhost:8080/categoria/cadastrar/" + encodeURI(rm)
 
     let nome = document.getElementById("nomeCategoria").value;
 
@@ -110,10 +111,11 @@ function postCategoria(url, body){
 }
 
 function deleteCategoria(nomeCategoria){
-    let url = "http://localhost:8080/categoria/deletar/"
+    rm = localStorage.getItem("rm")
+    let url = "http://localhost:8080/categoria/deletar/" + encodeURIComponent(nomeCategoria) + "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
-    request.open("DELETE", url + encodeURIComponent(nomeCategoria))
+    request.open("DELETE", url)
     request.send()
 
     request.onload = function(){

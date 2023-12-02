@@ -101,8 +101,8 @@ function limparTabela() {
 
 function criarBodyExemplar(){
     event.preventDefault()
-
-    let url = "http://localhost:8080/exemplar/adicionar"
+    rm = localStorage.getItem("rm")
+    let url = "http://localhost:8080/exemplar/adicionar" + encodeURI(rm)
 
     let isbn = document.getElementById("livro").value;
     let numeracao = document.getElementById("numeracaoExemplar").value
@@ -133,10 +133,11 @@ function postExemplar(url, body){
 }
 
 function deleteExemplar(isbn, numeracao){
-    let url = "http://localhost:8080/exemplar/deletar/"
+    rm = localStorage.getItem("rm")
+    let url = "http://localhost:8080/exemplar/deletar/" + encodeURIComponent(isbn) + "/" + encodeURIComponent(numeracao) +  "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
-    request.open("DELETE", url + encodeURIComponent(isbn) + "/" + encodeURIComponent(numeracao))
+    request.open("DELETE", url)
     request.send()
 
     request.onload = function(){
