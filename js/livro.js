@@ -1,3 +1,8 @@
+let UrlAPIBibliotecLocal = "http://localhost:8080/"
+let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
 function imagemBase64(input, callback) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
@@ -32,7 +37,8 @@ function criarBodyLivro(){
   
   imagemBase64(imagemForm, function (imagem) {
     
-    let url = "http://localhost:8080/livro/cadastrar/" + encodeURI(rm)
+    // let url = "http://localhost:8080/livro/cadastrar/" + encodeURI(rm)
+    let url = "tcc-22-teste-api.up.railway.app/livro/cadastrar/" + encodeURI(rm)
   
     let titulo = document.getElementById("tituloLivro").value;
     let subtitulo = document.getElementById("subtituloLivro").value;
@@ -90,7 +96,8 @@ function get(url) {
 }
   
 function getAutores(){
-  buscaAutores = get("http://localhost:8080/autor/buscar")
+  // buscaAutores = get("http://localhost:8080/autor/buscar")
+  buscaAutores = get("tcc-22-teste-api.up.railway.app/autor/buscar")
   
   //Transforma JSON para JS
   autores = JSON.parse(buscaAutores);
@@ -104,7 +111,9 @@ function getAutores(){
 }
   
 function getGeneros(){
-  buscaGeneros = get("http://localhost:8080/genero/buscar")
+  
+  // buscaGeneros = get("http://localhost:8080/genero/buscar")
+  buscaGeneros = get("tcc-22-teste-api.up.railway.app/genero/buscar")
   
   //Transforma JSON para JS
   generos = JSON.parse(buscaGeneros);
@@ -114,12 +123,14 @@ function getGeneros(){
   generos.forEach(genero => {
     let opcao = criaOpcaoGenero(genero);
     seletor.add(opcao)
-    });
+  });
 }
   
 function getCategorias(){
-  buscaCategorias = get("http://localhost:8080/categoria/buscar")
   
+  // buscaCategorias = get("http://localhost:8080/categoria/buscar")
+  buscaCategorias = get("tcc-22-teste-api.up.railway.app/categoria/buscar")
+
   //Transforma JSON para JS
   categorias = JSON.parse(buscaCategorias);
   
@@ -132,8 +143,10 @@ function getCategorias(){
 }
   
 function getEditoras(){
-  buscaEditoras = get("http://localhost:8080/editora/buscar")
   
+  // buscaEditoras = get("http://localhost:8080/editora/buscar")
+  buscaEditoras = get("tcc-22-teste-api.up.railway.app/editora/buscar")
+
   //Transforma JSON para JS
   editoras = JSON.parse(buscaEditoras);
   
@@ -221,8 +234,6 @@ function getLivros(){
     let linha = criarLinha(livro);
     bodyTabela.appendChild(linha);
   });
- 
-  console.log(livros)
 }
 
 function criarLinha(livro){
@@ -265,7 +276,9 @@ function criarLinha(livro){
 
 function deleteLivro(isbn){
   rm = localStorage.getItem("rm")
-  let url = "http://localhost:8080/livro/deletar/" + encodeURI(rm)
+  
+  // let url = "http://localhost:8080/livro/deletar/" + encodeURI(rm)
+  let url = "tcc-22-teste-api.up.railway.app/livro/deletar/" + encodeURI(rm)
 
   let request = new XMLHttpRequest()
   request.open("DELETE", url + encodeURIComponent(isbn))

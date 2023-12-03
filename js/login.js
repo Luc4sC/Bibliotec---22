@@ -1,3 +1,8 @@
+let UrlAPIBibliotecLocal = "http://localhost:8080/"
+let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
 function login(event){
   event.preventDefault()
   let url = "http://localhost:4500/api/users/login"

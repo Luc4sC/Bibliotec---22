@@ -1,3 +1,8 @@
+let UrlAPIBibliotecLocal = "http://localhost:8080/"
+let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
 function get(url) {
     let request = new XMLHttpRequest()
     request.open("GET", url, false)
@@ -7,7 +12,9 @@ function get(url) {
 }
 
 function getGeneros(){
-    buscaGeneros = get("http://localhost:8080/genero/buscar")
+    
+    // buscaGeneros = get("http://localhost:8080/genero/buscar")
+    buscaGeneros = get("tcc-22-teste-api.up.railway.app/genero/buscar")
  
     //Transforma JSON para JS
     generos = JSON.parse(buscaGeneros);
@@ -33,11 +40,9 @@ function getGeneros(){
     tabela.appendChild(bodyTabela)
     
     generos.forEach(genero => {
-     let linha = criarLinha(genero);
-     bodyTabela.appendChild(linha);
-     });
- 
-    console.log(generos)
+        let linha = criarLinha(genero);
+        bodyTabela.appendChild(linha);
+    });
 }
 
 function criarLinha(genero){
@@ -81,7 +86,9 @@ function limparTabela() {
 function criarBodyGenero(){
     event.preventDefault()
     rm = localStorage.getItem("rm")
-    let url = "http://localhost:8080/genero/cadastrar/" + encodeURI(rm)
+    
+    // let url = "http://localhost:8080/genero/cadastrar/" + encodeURI(rm)
+    let url = "tcc-22-teste-api.up.railway.app/genero/cadastrar/" + encodeURI(rm)
 
     let nome = document.getElementById("nomeGenero").value;
 
@@ -111,7 +118,9 @@ function postGenero(url, body){
 
 function deleteGenero(nomeGenero){
     rm = localStorage.getItem("rm")
-    let url = "http://localhost:8080/genero/deletar/" + encodeURIComponent(nomeGenero) + "/" + encodeURI(rm)
+    
+    // let url = "http://localhost:8080/genero/deletar/" + encodeURIComponent(nomeGenero) + "/" + encodeURI(rm)
+    let url = "tcc-22-teste-api.up.railway.app/genero/deletar/" + encodeURIComponent(nomeGenero) + "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
     request.open("DELETE", url)
@@ -131,4 +140,4 @@ function deleteGenero(nomeGenero){
 //Chama Funções ao Iniciar A Página
 document.addEventListener("DOMContentLoaded", function() {
     getGeneros();
-  });
+});

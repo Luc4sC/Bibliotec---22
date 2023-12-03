@@ -1,3 +1,8 @@
+let UrlAPIBibliotecLocal = "http://localhost:8080/"
+let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
 function get(url) {
     let request = new XMLHttpRequest()
     request.open("GET", url, false)
@@ -7,7 +12,9 @@ function get(url) {
 }
 
 function getExemplares(){
-    buscaExemplares = get("http://localhost:8080/exemplar/buscar")
+    
+    // buscaExemplares = get("http://localhost:8080/exemplar/buscar")
+    buscaExemplares = get("tcc-22-teste-api.up.railway.app/exemplar/buscar")
  
     //Transforma JSON para JS
     exemplares = JSON.parse(buscaExemplares);
@@ -24,7 +31,6 @@ function getExemplares(){
     bodyTabela = document.createElement("tbody")
 
     headVazio.id = "vazio2";
-
 
     headVazio.innerHTML = "";
     headTitulo.innerHTML = "Título";
@@ -43,11 +49,9 @@ function getExemplares(){
     tabela.appendChild(bodyTabela)
     
     exemplares.forEach(exemplar => {
-     let linha = criarLinha(exemplar);
-     bodyTabela.appendChild(linha);
-     });
- 
-    console.log(exemplares)
+        let linha = criarLinha(exemplar);
+        bodyTabela.appendChild(linha);
+    });
 }
 
 function criarLinha(exemplar){
@@ -102,7 +106,9 @@ function limparTabela() {
 function criarBodyExemplar(){
     event.preventDefault()
     rm = localStorage.getItem("rm")
-    let url = "http://localhost:8080/exemplar/adicionar" + encodeURI(rm)
+    
+    // let url = "http://localhost:8080/exemplar/adicionar" + encodeURI(rm)
+    let url = "tcc-22-teste-api.up.railway.app/exemplar/adicionar" + encodeURI(rm)
 
     let isbn = document.getElementById("livro").value;
     let numeracao = document.getElementById("numeracaoExemplar").value
@@ -134,7 +140,7 @@ function postExemplar(url, body){
 
 function deleteExemplar(isbn, numeracao){
     rm = localStorage.getItem("rm")
-    let url = "http://localhost:8080/exemplar/deletar/" + encodeURIComponent(isbn) + "/" + encodeURIComponent(numeracao) +  "/" + encodeURI(rm)
+    let url = "tcc-22-teste-api.up.railway.app/exemplar/deletar/" + encodeURIComponent(isbn) + "/" + encodeURIComponent(numeracao) +  "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
     request.open("DELETE", url)
@@ -154,7 +160,9 @@ function deleteExemplar(isbn, numeracao){
 
 //Cria seletores Livros
 function getLivros(){
-    buscaLivros = get("http://localhost:8080/livro/buscar")
+    
+    // buscaLivros = get("http://localhost:8080/livro/buscar")
+    buscaLivros = get("tcc-22-teste-api.up.railway.app/livro/buscar")
  
     //Transforma JSON para JS
     livros = JSON.parse(buscaLivros);
@@ -162,22 +170,20 @@ function getLivros(){
     let seletor = document.getElementById("livro");
 
     livros.forEach(livro => {
-     let opcao = criarOpcaoLivro(livro);
-     seletor.add(opcao);
-     });
+        let opcao = criarOpcaoLivro(livro);
+        seletor.add(opcao);
+    });
  
     console.log(livros)
 }
 
 function criarOpcaoLivro(livro){
-    console.log(livro)
-  
     novaOpcao = document.createElement("option")
     novaOpcao.value = livro.isbn
     novaOpcao.text = livro.titulo + " " + livro.subtitulo
   
     return novaOpcao
-  }
+}
 
 //Chama Funções ao carregar a Página
 document.addEventListener("DOMContentLoaded", function() {

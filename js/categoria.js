@@ -1,3 +1,8 @@
+let UrlAPIBibliotecLocal = "http://localhost:8080/"
+let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
 function get(url) {
     let request = new XMLHttpRequest()
     request.open("GET", url, false)
@@ -7,8 +12,9 @@ function get(url) {
 }
 
 function getCategorias(){
-    buscaCategorias = get("http://localhost:8080/categoria/buscar")
- 
+    // buscaCategorias = get("http://localhost:8080/categoria/buscar")
+    buscaCategorias = get("tcc-22-teste-api.up.railway.app/categoria/buscar")
+    
     //Transforma JSON para JS
     categorias = JSON.parse(buscaCategorias);
  
@@ -82,8 +88,10 @@ function criarBodyCategoria(){
     event.preventDefault()
 
     rm = localStorage.getItem("rm")
-    let url = "http://localhost:8080/categoria/cadastrar/" + encodeURI(rm)
-
+    
+    // let url = "http://localhost:8080/categoria/cadastrar/" + encodeURI(rm)
+    let url = "tcc-22-teste-api.up.railway.app/categoria/cadastrar/" + encodeURI(rm)
+    
     let nome = document.getElementById("nomeCategoria").value;
 
     console.log(nome)
@@ -112,7 +120,9 @@ function postCategoria(url, body){
 
 function deleteCategoria(nomeCategoria){
     rm = localStorage.getItem("rm")
-    let url = "http://localhost:8080/categoria/deletar/" + encodeURIComponent(nomeCategoria) + "/" + encodeURI(rm)
+
+    // let url = "http://localhost:8080/categoria/deletar/" + encodeURIComponent(nomeCategoria) + "/" + encodeURI(rm)
+    let url = "tcc-22-teste-api.up.railway.app/categoria/deletar/" + encodeURIComponent(nomeCategoria) + "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
     request.open("DELETE", url)
@@ -132,4 +142,4 @@ function deleteCategoria(nomeCategoria){
 //Chama Funções ao Iniciar A Página
 document.addEventListener("DOMContentLoaded", function() {
     getCategorias();
-  });
+});

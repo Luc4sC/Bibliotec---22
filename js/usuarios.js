@@ -1,3 +1,8 @@
+let UrlAPIBibliotecLocal = "http://localhost:8080/"
+let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
 function get(url) {
     let request = new XMLHttpRequest()
     request.open("GET", url, false)
@@ -29,7 +34,9 @@ function buscarRM(event){
 }
 
 function getRequisicoes(rm){
-    buscaEmprestimos = get("http://localhost:8080/emprestimo/buscar/" + encodeURIComponent(rm))
+    
+    // buscaEmprestimos = get("http://localhost:8080/emprestimo/buscar/" + encodeURIComponent(rm))
+    buscaEmprestimos = get("tcc-22-teste-api.up.railway.app/emprestimo/buscar/" + encodeURIComponent(rm))
 
     emprestimos = JSON.parse(buscaEmprestimos)
 
@@ -58,8 +65,6 @@ function getRequisicoes(rm){
         let linha = criarLinhaEmprestimo(emprestimo);
         bodyTabela.appendChild(linha);
     });
-    
-    console.log(emprestimos)
 }
 
 function criarLinhaEmprestimo(emprestimo){

@@ -1,3 +1,8 @@
+let UrlAPIBibliotecLocal = "http://localhost:8080/"
+let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
 function get(url){
     let request = new XMLHttpRequest()
     request.open("GET", url, false)
@@ -7,7 +12,9 @@ function get(url){
 }
 
 function getEmprestimos(){
-    buscaEmprestimos = get("http://localhost:8080/emprestimo/buscar")
+    
+    // buscaEmprestimos = get("http://localhost:8080/emprestimo/buscar")
+    buscaEmprestimos = get("tcc-22-teste-api.up.railway.app/emprestimo/buscar")
 
     emprestimos = JSON.parse(buscaEmprestimos)
 

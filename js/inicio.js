@@ -1,3 +1,8 @@
+let UrlAPIBibliotecLocal = "http://localhost:8080/"
+let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
 function get(url){
     let request = new XMLHttpRequest()
     request.open("GET", url, false)
@@ -7,7 +12,9 @@ function get(url){
 }
 
 function getLivro(isbn){
-    let url = "http://localhost:8080/livro/buscar/" + encodeURI(isbn)
+    
+    // let url = "http://localhost:8080/livro/buscar/" + encodeURI(isbn)
+    let url = "tcc-22-teste-api.up.railway.app/livro/buscar/" + encodeURI(isbn)
 
     buscaLivro = get(url)
 
