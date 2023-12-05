@@ -1,7 +1,19 @@
+//APIs Locais
 let UrlAPIBibliotecLocal = "http://localhost:8080/"
 let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+
+
+//APIs Testes
 let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlTesteAPIUsers = "https://bibliotecusers-testeapi.up.railway.app/api/users/"
+
+//APIs definitivas
+let urlAPIBibliotec = "https://tcc-22-production.up.railway.app/"
 let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
+//URLs
+let urlBibliotec = urlAPIBibliotec
+let urlUsers = urlAPIUsers
 
 
 function get(url) {
@@ -13,7 +25,7 @@ function get(url) {
 }
 
 function getAutores(){
-    buscaAutores = get("tcc-22-teste-api.up.railway.app/autor/buscar")
+    buscaAutores = get(encodeURI(urlBibliotec) + encodeURI("autor/buscar"))
  
     //Transforma JSON para JS
     autores = JSON.parse(buscaAutores);
@@ -48,9 +60,7 @@ function getAutores(){
     autores.forEach(autor => {
      let linha = criarLinha(autor);
      bodyTabela.appendChild(linha);
-     });
- 
-    console.log(autores)
+    });
 }
 
 function criarLinha(autor){
@@ -100,17 +110,17 @@ function limparTabela() {
 
 function criarBodyAutor(){
     event.preventDefault()
-    rm = localStorage.getItem("rm")
-    // let url = "http://localhost:8080/autor/cadastrar/" + encodeURI(rm)
-    let url = "tcc-22-teste-api.up.railway.app/autor/cadastrar/" + encodeURI(rm)
+    rm = sessionStorage.getItem("rm")
+
+    let url = encodeURI(urlBibliotec) + encodeURI("autor/cadastrar/") + encodeURI(rm)
 
     let nome = document.getElementById("nomeAutor").value;
     let nomeArtistico = document.getElementById("nomeArtisticoAutor").value;
     let dataNascimento = document.getElementById("dataNascAutor").value;
 
-    console.log(nome)
-    console.log(nomeArtistico)
-    console.log(dataNascimento)
+    // console.log(nome)
+    // console.log(nomeArtistico)
+    // console.log(dataNascimento)
 
     body = {"nomeAutor" : nome,
     "nomeArtistico" : nomeArtistico,
@@ -127,7 +137,7 @@ function postAutor(url, body){
     request.send(JSON.stringify(body))
 
     request.onload = function(){
-        console.log(this.responseText)
+        // console.log(this.responseText)
         alert(this.responseText)
 
         limparTabela();
@@ -138,16 +148,16 @@ function postAutor(url, body){
 }
 
 function deleteAutor(nomeArtistico){
-    rm = localStorage.getItem("rm")
-    // let url = "http://localhost:8080/autor/deletar/" + encodeURIComponent(nomeArtistico) + "/" + encodeURI(rm)
-    let url = "tcc-22-teste-api.up.railway.app/autor/deletar/" + encodeURIComponent(nomeArtistico) + "/" + encodeURI(rm)
+    rm = sessionStorage.getItem("rm")
+
+    let url = encodeURI(urlBibliotec) + encodeURI("autor/deletar/") + encodeURIComponent(nomeArtistico) + "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
     request.open("DELETE", url)
     request.send()
 
     request.onload = function(){
-        console.log(this.responseText)
+        // console.log(this.responseText)
         alert(this.responseText)
 
         limparTabela();
@@ -161,3 +171,9 @@ function deleteAutor(nomeArtistico){
 document.addEventListener("DOMContentLoaded", function() {
     getAutores();
 });
+
+var usuarioLogado = sessionStorage.getItem('usuarioLogado');
+
+if (!usuarioLogado) {
+    window.location.href = 'index.html';
+}

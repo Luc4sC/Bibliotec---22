@@ -1,7 +1,19 @@
+//APIs Locais
 let UrlAPIBibliotecLocal = "http://localhost:8080/"
 let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+
+
+//APIs Testes
 let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlTesteAPIUsers = "https://bibliotecusers-testeapi.up.railway.app/api/users/"
+
+//APIs definitivas
+let urlAPIBibliotec = "https://tcc-22-production.up.railway.app/"
 let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
+//URLs
+let urlBibliotec = urlAPIBibliotec
+let urlUsers = urlAPIUsers
 
 function imagemBase64(input, callback) {
   if (input.files && input.files[0]) {
@@ -31,14 +43,12 @@ function imagemBase64(input, callback) {
   
 function criarBodyLivro(){
   event.preventDefault()
-  rm = localStorage.getItem("rm")
+  rm = sessionStorage.getItem("rm")
   console.log(rm)
   let imagemForm = document.getElementById("imgLivro");
   
   imagemBase64(imagemForm, function (imagem) {
-    
-    // let url = "http://localhost:8080/livro/cadastrar/" + encodeURI(rm)
-    let url = "tcc-22-teste-api.up.railway.app/livro/cadastrar/" + encodeURI(rm)
+    let url = encodeURI(urlBibliotec) + encodeURI("livro/cadastrar/") + encodeURI(rm)
   
     let titulo = document.getElementById("tituloLivro").value;
     let subtitulo = document.getElementById("subtituloLivro").value;
@@ -77,7 +87,7 @@ function postLivro(url, livro){
   request.send(JSON.stringify(livro))
   
   request.onload = function(){
-    console.log(this.responseText)
+    // console.log(this.responseText)
     alert(this.responseText)
     limparTabela();
     getLivros()
@@ -96,8 +106,7 @@ function get(url) {
 }
   
 function getAutores(){
-  // buscaAutores = get("http://localhost:8080/autor/buscar")
-  buscaAutores = get("tcc-22-teste-api.up.railway.app/autor/buscar")
+  buscaAutores = get(encodeURI(urlBibliotec) + encodeURI("autor/buscar"))
   
   //Transforma JSON para JS
   autores = JSON.parse(buscaAutores);
@@ -111,9 +120,7 @@ function getAutores(){
 }
   
 function getGeneros(){
-  
-  // buscaGeneros = get("http://localhost:8080/genero/buscar")
-  buscaGeneros = get("tcc-22-teste-api.up.railway.app/genero/buscar")
+  buscaGeneros = get(encodeURI(urlBibliotec) + encodeURI("genero/buscar"))
   
   //Transforma JSON para JS
   generos = JSON.parse(buscaGeneros);
@@ -127,9 +134,7 @@ function getGeneros(){
 }
   
 function getCategorias(){
-  
-  // buscaCategorias = get("http://localhost:8080/categoria/buscar")
-  buscaCategorias = get("tcc-22-teste-api.up.railway.app/categoria/buscar")
+  buscaCategorias = get(encodeURI(urlBibliotec) + encodeURI("categoria/buscar"))
 
   //Transforma JSON para JS
   categorias = JSON.parse(buscaCategorias);
@@ -143,9 +148,7 @@ function getCategorias(){
 }
   
 function getEditoras(){
-  
-  // buscaEditoras = get("http://localhost:8080/editora/buscar")
-  buscaEditoras = get("tcc-22-teste-api.up.railway.app/editora/buscar")
+  buscaEditoras = get(encodeURI(urlBibliotec) + encodeURI("editora/buscar"))
 
   //Transforma JSON para JS
   editoras = JSON.parse(buscaEditoras);
@@ -199,7 +202,7 @@ function limparTabela() {
 }
 
 function getLivros(){
-  buscaLivros = get("http://localhost:8080/livro/buscar")
+  buscaLivros = get(encodeURI(urlBibliotec) + "livro/buscar")
  
   //Transforma JSON para JS
   livros = JSON.parse(buscaLivros);
@@ -275,23 +278,22 @@ function criarLinha(livro){
 }
 
 function deleteLivro(isbn){
-  rm = localStorage.getItem("rm")
-  
-  // let url = "http://localhost:8080/livro/deletar/" + encodeURI(rm)
-  let url = "tcc-22-teste-api.up.railway.app/livro/deletar/" + encodeURI(rm)
+  rm = sessionStorage.getItem("rm")
+
+  let url = encodeURI(urlBibliotec) + encodeURI("livro/deletar/") + encodeURI(rm)
 
   let request = new XMLHttpRequest()
   request.open("DELETE", url + encodeURIComponent(isbn))
   request.send()
 
   request.onload = function(){
-    console.log(this.responseText)
+    // console.log(this.responseText)
     alert(this.responseText)
     limparTabela();
     getLivros();
   }
 
-    return this.responseText
+  return this.responseText
 }
 
 
@@ -301,6 +303,12 @@ document.addEventListener("DOMContentLoaded", function() {
   getCategorias();
   getEditoras();
   getLivros();
-  rm = localStorage.getItem("rm")
-  console.log(rm)
+  rm = sessionStorage.getItem("rm")
+  // console.log(rm)
 });
+
+var usuarioLogado = sessionStorage.getItem('usuarioLogado');
+
+if (!usuarioLogado) {
+    window.location.href = 'index.html';
+}

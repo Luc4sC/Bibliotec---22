@@ -1,7 +1,19 @@
+//APIs Locais
 let UrlAPIBibliotecLocal = "http://localhost:8080/"
 let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+
+
+//APIs Testes
 let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlTesteAPIUsers = "https://bibliotecusers-testeapi.up.railway.app/api/users/"
+
+//APIs definitivas
+let urlAPIBibliotec = "https://tcc-22-production.up.railway.app/"
 let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
+//URLs
+let urlBibliotec = urlAPIBibliotec
+let urlUsers = urlAPIUsers
 
 function get(url) {
     let request = new XMLHttpRequest()
@@ -27,16 +39,14 @@ function buscarRM(event){
     event.preventDefault()
     let rm = document.getElementById("rm").value
 
-    console.log(rm)
+    // console.log(rm)
     limparTabela()
     getUser(rm)
     getRequisicoes(rm)
 }
 
 function getRequisicoes(rm){
-    
-    // buscaEmprestimos = get("http://localhost:8080/emprestimo/buscar/" + encodeURIComponent(rm))
-    buscaEmprestimos = get("tcc-22-teste-api.up.railway.app/emprestimo/buscar/" + encodeURIComponent(rm))
+    buscaEmprestimos = get(encodeURI(urlBibliotec) + "emprestimo/buscar/" + encodeURIComponent(rm))
 
     emprestimos = JSON.parse(buscaEmprestimos)
 
@@ -113,7 +123,7 @@ function criarLinhaEmprestimo(emprestimo){
 }
 
 function getUser(rm){
-    buscaUsuario = get("http://localhost:4500/api/users/user/" + encodeURIComponent(rm))
+    buscaUsuario = get(encodeURI(urlUsers) + "user/" + encodeURIComponent(rm))
 
     usuario = JSON.parse(buscaUsuario);
 
@@ -141,8 +151,6 @@ function getUser(rm){
 
     let linha = criarLinhaUser(usuario)
     bodyTabela.appendChild(linha)
-
-    console.log(usuario)
 }
 
 function criarLinhaUser(usuario){
@@ -205,7 +213,7 @@ function post(url){
     request.send()
 
     request.onload = function(){
-        console.log(this.responseText)
+        // console.log(this.responseText)
         alert(this.responseText)
     }
 
@@ -213,19 +221,25 @@ function post(url){
 }
 
 function bloquearUsuario(rm){
-    let url = "http://localhost:4500/api/users/block/account/" + encodeURI(rm)
+    let url = encodeURI(urlUsers) + "block/account/" + encodeURI(rm)
 
     post(url)
 }
 
 function desbloquearUsuario(rm){
-    let url = "http://localhost:4500/api/users/unlock/account/" + encodeURI(rm)
+    let url = encodeURI(urlUsers) + "unlock/account/" + encodeURI(rm)
 
     post(url)
 }
 
 function salvarRequisicao(dataRequisicao, rmRequisicao, isbn) {
-    localStorage.setItem("dataRequisicao", dataRequisicao);
-    localStorage.setItem("rmRequisicao", rmRequisicao);
-    localStorage.setItem("isbn", isbn);
+    sessionStorage.setItem("dataRequisicao", dataRequisicao);
+    sessionStorage.setItem("rmRequisicao", rmRequisicao);
+    sessionStorage.setItem("isbn", isbn);
+}
+
+var usuarioLogado = sessionStorage.getItem('usuarioLogado');
+
+if (!usuarioLogado) {
+    window.location.href = 'index.html';
 }

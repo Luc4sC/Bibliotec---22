@@ -1,7 +1,19 @@
+//APIs Locais
 let UrlAPIBibliotecLocal = "http://localhost:8080/"
 let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+
+
+//APIs Testes
 let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlTesteAPIUsers = "https://bibliotecusers-testeapi.up.railway.app/api/users/"
+
+//APIs definitivas
+let urlAPIBibliotec = "https://tcc-22-production.up.railway.app/"
 let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
+//URLs
+let urlBibliotec = urlAPIBibliotec
+let urlUsers = urlAPIUsers
 
 function get(url) {
     let request = new XMLHttpRequest()
@@ -12,9 +24,7 @@ function get(url) {
 }
 
 function getEditoras(){
-    
-    // buscaEditoras = get("http://localhost:8080/editora/buscar")
-    buscaEditoras = get("tcc-22-teste-api.up.railway.app/editora/buscar")
+    buscaEditoras = get(encodeURI(urlBibliotec) + encodeURI("editora/buscar"))
  
     //Transforma JSON para JS
     editoras = JSON.parse(buscaEditoras);
@@ -49,8 +59,6 @@ function getEditoras(){
      let linha = criarLinha(editora);
      bodyTabela.appendChild(linha);
      });
- 
-    console.log(editoras)
 }
 
 function criarLinha(editora){
@@ -100,10 +108,9 @@ function limparTabela() {
 
 function criarBodyEditora(){
     event.preventDefault()
-    rm = localStorage.getItem("rm")
+    rm = sessionStorage.getItem("rm")
     
-    // let url = "http://localhost:8080/editora/cadastrar/" + encodeURI(rm)
-    let url = "http://tcc-22-teste-api.up.railway.app/editora/cadastrar/" + encodeURI(rm)
+    let url = encodeURI(urlBibliotec) + encodeURI("editora/cadastrar/") + encodeURI(rm)
 
     let nomeFantasia = document.getElementById("nomeFantasiaEditora").value;
     let razaoSocial = document.getElementById("razaoSocialEditora").value;
@@ -116,16 +123,16 @@ function criarBodyEditora(){
     let bairro = document.getElementById("bairroEditora").value;
     let cidade = document.getElementById("cidadeEditora").value;
 
-    console.log(nomeFantasia)
-    console.log(razaoSocial)
-    console.log(cnpj)
-    console.log(email)
-    console.log(telefone)
-    console.log(cep)
-    console.log(logradouro)
-    console.log(numero)
-    console.log(bairro)
-    console.log(cidade)
+    // console.log(nomeFantasia)
+    // console.log(razaoSocial)
+    // console.log(cnpj)
+    // console.log(email)
+    // console.log(telefone)
+    // console.log(cep)
+    // console.log(logradouro)
+    // console.log(numero)
+    // console.log(bairro)
+    // console.log(cidade)
 
     endereco = { "cep" : cep,
         "logradouro" : logradouro,
@@ -152,7 +159,7 @@ function postEditora(url, body){
     request.send(JSON.stringify(body))
 
     request.onload = function(){
-        console.log(this.responseText)
+        // console.log(this.responseText)
         alert(this.responseText)
 
         limparTabela();
@@ -163,17 +170,16 @@ function postEditora(url, body){
 }
 
 function deleteEditora(nomeFantasia){
-    rm = localStorage.getItem("rm")
-    
-    // let url = "http://localhost:8080/editora/deletar/" + encodeURIComponent(nomeFantasia) + "/" + encodeURI(rm)
-    let url = "tcc-22-teste-api.up.railway.app/editora/deletar/" + encodeURIComponent(nomeFantasia) + "/" + encodeURI(rm)
+    rm = sessionStorage.getItem("rm")
+
+    let url = encodeURI(urlBibliotec) + encodeURI("editora/deletar/") + encodeURIComponent(nomeFantasia) + "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
     request.open("DELETE", url)
     request.send()
 
     request.onload = function(){
-        console.log(this.responseText)
+        // console.log(this.responseText)
         alert(this.responseText)
 
         limparTabela();
@@ -187,3 +193,9 @@ function deleteEditora(nomeFantasia){
 document.addEventListener("DOMContentLoaded", function() {
     getEditoras();
 });
+
+var usuarioLogado = sessionStorage.getItem('usuarioLogado');
+
+if (!usuarioLogado) {
+    window.location.href = 'index.html';
+}

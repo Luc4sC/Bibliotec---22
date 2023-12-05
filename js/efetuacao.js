@@ -1,7 +1,19 @@
+//APIs Locais
 let UrlAPIBibliotecLocal = "http://localhost:8080/"
 let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+
+
+//APIs Testes
 let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlTesteAPIUsers = "https://bibliotecusers-testeapi.up.railway.app/api/users/"
+
+//APIs definitivas
+let urlAPIBibliotec = "https://tcc-22-production.up.railway.app/"
 let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
+//URLs
+let urlBibliotec = urlAPIBibliotec
+let urlUsers = urlAPIUsers
 
 function get(url){
     let request = new XMLHttpRequest()
@@ -13,10 +25,9 @@ function get(url){
 
 function criarBodyEfetuacao(){
   event.preventDefault()
-  rm = localStorage.getItem("rm")
-  
-  // let url = "http://localhost:8080/emprestimo/efetuar/" + encodeURI(rm)
-  let url = "tcc-22-teste-api.up.railway.app/emprestimo/efetuar/" + encodeURI(rm)
+  rmBibliotecario = sessionStorage.getItem("rm")
+
+  let url = encodeURI(urlBibliotec) + encodeURI("emprestimo/efetuar/") + encodeURI(rmBibliotecario)
 
   let rm = document.getElementById("usuarioEfetuacao").value;
   let isbn = document.getElementById("livro").value;
@@ -50,10 +61,9 @@ function putEfetuacao(url, body) {
 
 function criarBodyFinalizacao(){
   event.preventDefault()
-  rm = localStorage.getItem("rm")
-    
-    // let url = "http://localhost:8080/emprestimo/finalizar/" + encodeURI(rm)
-  let url = "tcc-22-teste-api.up.railway.app/emprestimo/finalizar/" + encodeURI(rm)
+  rmBibliotecario = sessionStorage.getItem("rm")
+
+  let url = encodeURI(urlBibliotec) + encodeURI("emprestimo/finalizar/") + encodeURI(rmBibliotecario)
 
   let rm = document.getElementById("usuarioEfetuacao").value;
   let isbn = document.getElementById("livro").value;
@@ -87,20 +97,19 @@ function putFinalizacao(url, body){
 
 function criarBodyRecusa(){
     event.preventDefault()
-    rm = localStorage.getItem("rm")
+    rmBibliotecario = sessionStorage.getItem("rm")
     
-    // let url = "http://localhost:8080/emprestimo/recusar/" + encodeURI(rm)
-    let url = "tcc-22-teste-api.up.railway.app/emprestimo/recusar/" + encodeURI(rm)
+    let url = encodeURI(urlBibliotec) + encodeURI("emprestimo/recusar/") + encodeURI(rmBibliotecario)
 
     let rm = document.getElementById("usuarioEfetuacao").value;
     let isbn = document.getElementById("livro").value;
     let observacao = document.getElementById("observacao").value;
     let dataRequisicao = document.getElementById("dataRequisicao").value;
 
-    console.log(rm)
-    console.log(isbn)
-    console.log(observacao)
-    console.log(dataRequisicao)
+    // console.log(rm)
+    // console.log(isbn)
+    // console.log(observacao)
+    // console.log(dataRequisicao)
 
     body = {"rm" : rm, "isbn": isbn, "observacao": observacao, "dataRequisicao": dataRequisicao}
 
@@ -128,8 +137,7 @@ function deleteEmprestimo(url, body) {
 
 function getExemplares(isbn){
   
-  // buscaExemplares = get("http://localhost:8080/exemplar/buscar/" + encodeURIComponent(isbn))
-  buscaExemplares = get("tcc-22-teste-api.up.railway.app/exemplar/buscar/" + encodeURIComponent(isbn))
+  buscaExemplares = get(encodeURI(urlBibliotec) + encodeURI("exemplar/buscar/") + encodeURIComponent(isbn))
 
   exemplares = JSON.parse(buscaExemplares)
     
@@ -137,9 +145,7 @@ function getExemplares(isbn){
 }
 
 function getLivro(isbn){
-  
-  // buscaLivro = get("http://localhost:8080/livro/buscar/" + encodeURIComponent(isbn))
-  buscaLivro = get("tcc-22-teste-api.up.railway.app/livro/buscar/" + encodeURIComponent(isbn))
+  buscaLivro = get(encodeURI(urlBibliotec) + encodeURI("livro/buscar/") + encodeURIComponent(isbn))
 
   livro = JSON.parse(buscaLivro)
 
@@ -147,7 +153,7 @@ function getLivro(isbn){
 }
 
 function getUser(rm){
-  buscaUser = get("http://localhost:4500/api/users/user/" + encodeURIComponent(rm))
+  buscaUser = get(encodeURI(urlUsers) + encodeURI("user/") + encodeURIComponent(rm))
 
   user = JSON.parse(buscaUser)
 
@@ -180,8 +186,8 @@ function criaOpcaoUser(user){
 //Chama Funções ao Iniciar A Página
 document.addEventListener("DOMContentLoaded", function() {
 
-  let isbn = localStorage.getItem("isbn")
-  let rmRequisicao = localStorage.getItem("rmRequisicao")
+  let isbn = sessionStorage.getItem("isbn")
+  let rmRequisicao = sessionStorage.getItem("rmRequisicao")
 
   console.log(isbn)
   console.log(rmRequisicao)
@@ -205,6 +211,11 @@ document.addEventListener("DOMContentLoaded", function() {
   seletorUsuario.appendChild(opcaoUser)
   seletorLivro.appendChild(opcaoLivro)
 
-  dataRequisicao.value = localStorage.getItem('dataRequisicao')
+  dataRequisicao.value = sessionStorage.getItem('dataRequisicao')
 });
 
+var usuarioLogado = sessionStorage.getItem('usuarioLogado');
+
+if (!usuarioLogado) {
+    window.location.href = 'index.html';
+}

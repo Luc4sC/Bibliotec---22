@@ -1,7 +1,19 @@
+//APIs Locais
 let UrlAPIBibliotecLocal = "http://localhost:8080/"
 let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+
+
+//APIs Testes
 let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlTesteAPIUsers = "https://bibliotecusers-testeapi.up.railway.app/api/users/"
+
+//APIs definitivas
+let urlAPIBibliotec = "https://tcc-22-production.up.railway.app/"
 let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
+//URLs
+let urlBibliotec = urlAPIBibliotec
+let urlUsers = urlAPIUsers
 
 function get(url){
     let request = new XMLHttpRequest()
@@ -12,9 +24,7 @@ function get(url){
 }
 
 function getLivro(isbn){
-    
-    // let url = "http://localhost:8080/livro/buscar/" + encodeURI(isbn)
-    let url = "tcc-22-teste-api.up.railway.app/livro/buscar/" + encodeURI(isbn)
+    let url = encodeURI(urlBibliotec) + encodeURI("livro/buscar/") + encodeURI(isbn)
 
     buscaLivro = get(url)
 
@@ -51,13 +61,17 @@ function passarDadosLivro(livro){
     pCategoria.innerHTML = livro.categoria.nome
     pData.innerHTML = livro.data
     pEditora.innerHTML = livro.editora.nomeFantasia
-    console.log(livro.imagemBase64)
+    // console.log(livro.imagemBase64)
     imgLivro.src = "data:image/jpeg;base64," + livro.imagemBase64
 
     imgLivro.innerHTML;
 }
 
+var usuarioLogado = sessionStorage.getItem('usuarioLogado');
 
+if (!usuarioLogado) {
+    window.location.href = 'index.html';
+}
 
 //Método para criar elementos pós pesquisar livro
 

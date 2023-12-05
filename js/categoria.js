@@ -1,7 +1,20 @@
+//APIs Locais
+//APIs Locais
 let UrlAPIBibliotecLocal = "http://localhost:8080/"
 let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+
+
+//APIs Testes
 let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlTesteAPIUsers = "https://bibliotecusers-testeapi.up.railway.app/api/users/"
+
+//APIs definitivas
+let urlAPIBibliotec = "https://tcc-22-production.up.railway.app/"
 let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
+//URLs
+let urlBibliotec = urlAPIBibliotec
+let urlUsers = urlAPIUsers
 
 function get(url) {
     let request = new XMLHttpRequest()
@@ -12,8 +25,7 @@ function get(url) {
 }
 
 function getCategorias(){
-    // buscaCategorias = get("http://localhost:8080/categoria/buscar")
-    buscaCategorias = get("tcc-22-teste-api.up.railway.app/categoria/buscar")
+    buscaCategorias = get(encodeURI(urlBibliotec) + encodeURI("categoria/buscar"))
     
     //Transforma JSON para JS
     categorias = JSON.parse(buscaCategorias);
@@ -41,9 +53,7 @@ function getCategorias(){
     categorias.forEach(categoria => {
      let linha = criarLinha(categoria);
      bodyTabela.appendChild(linha);
-     });
- 
-    console.log(categorias)
+    });
 }
 
 function criarLinha(categoria){
@@ -87,14 +97,13 @@ function limparTabela() {
 function criarBodyCategoria(){
     event.preventDefault()
 
-    rm = localStorage.getItem("rm")
+    rm = sessionStorage.getItem("rm")
     
-    // let url = "http://localhost:8080/categoria/cadastrar/" + encodeURI(rm)
-    let url = "tcc-22-teste-api.up.railway.app/categoria/cadastrar/" + encodeURI(rm)
+    let url = encodeURI(urlBibliotec) + encodeURI("categoria/cadastrar/") + encodeURI(rm)
     
     let nome = document.getElementById("nomeCategoria").value;
 
-    console.log(nome)
+    // console.log(nome)
 
     body = {"nomeCategoria" : nome}
 
@@ -108,7 +117,7 @@ function postCategoria(url, body){
     request.send(JSON.stringify(body))
 
     request.onload = function(){
-        console.log(this.responseText)
+        // console.log(this.responseText)
         alert(this.responseText)
 
         limparTabela();
@@ -119,17 +128,16 @@ function postCategoria(url, body){
 }
 
 function deleteCategoria(nomeCategoria){
-    rm = localStorage.getItem("rm")
+    rm = sessionStorage.getItem("rm")
 
-    // let url = "http://localhost:8080/categoria/deletar/" + encodeURIComponent(nomeCategoria) + "/" + encodeURI(rm)
-    let url = "tcc-22-teste-api.up.railway.app/categoria/deletar/" + encodeURIComponent(nomeCategoria) + "/" + encodeURI(rm)
+    let url = encodeURI(urlBibliotec) + encodeURI("categoria/deletar/") + encodeURIComponent(nomeCategoria) + "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
     request.open("DELETE", url)
     request.send()
 
     request.onload = function(){
-        console.log(this.responseText)
+        // console.log(this.responseText)
         alert(this.responseText)
 
         limparTabela();
@@ -143,3 +151,9 @@ function deleteCategoria(nomeCategoria){
 document.addEventListener("DOMContentLoaded", function() {
     getCategorias();
 });
+
+var usuarioLogado = sessionStorage.getItem('usuarioLogado');
+
+if (!usuarioLogado) {
+    window.location.href = 'index.html';
+}

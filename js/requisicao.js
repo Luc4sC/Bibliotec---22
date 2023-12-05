@@ -1,7 +1,19 @@
+//APIs Locais
 let UrlAPIBibliotecLocal = "http://localhost:8080/"
 let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+
+
+//APIs Testes
 let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlTesteAPIUsers = "https://bibliotecusers-testeapi.up.railway.app/api/users/"
+
+//APIs definitivas
+let urlAPIBibliotec = "https://tcc-22-production.up.railway.app/"
 let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
+//URLs
+let urlBibliotec = urlAPIBibliotec
+let urlUsers = urlAPIUsers
 
 function get(url){
     let request = new XMLHttpRequest()
@@ -12,9 +24,7 @@ function get(url){
 }
 
 function getEmprestimos(){
-    
-    // buscaEmprestimos = get("http://localhost:8080/emprestimo/buscar")
-    buscaEmprestimos = get("tcc-22-teste-api.up.railway.app/emprestimo/buscar")
+    buscaEmprestimos = get(encodeURI(urlBibliotec) + "emprestimo/buscar")
 
     emprestimos = JSON.parse(buscaEmprestimos)
 
@@ -93,12 +103,18 @@ function criarLinha(emprestimo){
 }
 
 function salvarRequisicao(dataRequisicao, rmRequisicao, isbn) {
-    localStorage.setItem("dataRequisicao", dataRequisicao);
-    localStorage.setItem("rmRequisicao", rmRequisicao);
-    localStorage.setItem("isbn", isbn);
+    sessionStorage.setItem("dataRequisicao", dataRequisicao);
+    sessionStorage.setItem("rmRequisicao", rmRequisicao);
+    sessionStorage.setItem("isbn", isbn);
 }
 
 //Chama Funções ao Iniciar A Página
 document.addEventListener("DOMContentLoaded", function() {
     getEmprestimos();
 });
+
+var usuarioLogado = sessionStorage.getItem('usuarioLogado');
+
+if (!usuarioLogado) {
+    window.location.href = 'index.html';
+}

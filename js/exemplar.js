@@ -1,7 +1,19 @@
+//APIs Locais
 let UrlAPIBibliotecLocal = "http://localhost:8080/"
 let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+
+
+//APIs Testes
 let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlTesteAPIUsers = "https://bibliotecusers-testeapi.up.railway.app/api/users/"
+
+//APIs definitivas
+let urlAPIBibliotec = "https://tcc-22-production.up.railway.app/"
 let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
+//URLs
+let urlBibliotec = urlAPIBibliotec
+let urlUsers = urlAPIUsers
 
 function get(url) {
     let request = new XMLHttpRequest()
@@ -12,9 +24,7 @@ function get(url) {
 }
 
 function getExemplares(){
-    
-    // buscaExemplares = get("http://localhost:8080/exemplar/buscar")
-    buscaExemplares = get("tcc-22-teste-api.up.railway.app/exemplar/buscar")
+    buscaExemplares = get(encodeURI(urlBibliotec) + encodeURI("exemplar/buscar"))
  
     //Transforma JSON para JS
     exemplares = JSON.parse(buscaExemplares);
@@ -105,10 +115,9 @@ function limparTabela() {
 
 function criarBodyExemplar(){
     event.preventDefault()
-    rm = localStorage.getItem("rm")
-    
-    // let url = "http://localhost:8080/exemplar/adicionar" + encodeURI(rm)
-    let url = "tcc-22-teste-api.up.railway.app/exemplar/adicionar" + encodeURI(rm)
+    rm = sessionStorage.getItem("rm")
+
+    let url = encodeURI(urlBibliotec) + encodeURI("exemplar/adicionar/") + encodeURI(rm)
 
     let isbn = document.getElementById("livro").value;
     let numeracao = document.getElementById("numeracaoExemplar").value
@@ -128,7 +137,7 @@ function postExemplar(url, body){
     request.send(JSON.stringify(body))
 
     request.onload = function(){
-        console.log(this.responseText)
+        // console.log(this.responseText)
         alert(this.responseText)
 
         limparTabela();
@@ -139,8 +148,9 @@ function postExemplar(url, body){
 }
 
 function deleteExemplar(isbn, numeracao){
-    rm = localStorage.getItem("rm")
-    let url = "tcc-22-teste-api.up.railway.app/exemplar/deletar/" + encodeURIComponent(isbn) + "/" + encodeURIComponent(numeracao) +  "/" + encodeURI(rm)
+    rm = sessionStorage.getItem("rm")
+
+    let url = encodeURI(urlBibliotec) + encodeURI("exemplar/deletar/") + encodeURIComponent(isbn) + "/" + encodeURIComponent(numeracao) +  "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
     request.open("DELETE", url)
@@ -160,9 +170,7 @@ function deleteExemplar(isbn, numeracao){
 
 //Cria seletores Livros
 function getLivros(){
-    
-    // buscaLivros = get("http://localhost:8080/livro/buscar")
-    buscaLivros = get("tcc-22-teste-api.up.railway.app/livro/buscar")
+    buscaLivros = get(encodeURI(urlBibliotec) + encodeURI("livro/buscar"))
  
     //Transforma JSON para JS
     livros = JSON.parse(buscaLivros);
@@ -190,3 +198,9 @@ document.addEventListener("DOMContentLoaded", function() {
     getExemplares();
     getLivros();
 });
+
+var usuarioLogado = sessionStorage.getItem('usuarioLogado');
+
+if (!usuarioLogado) {
+    window.location.href = 'index.html';
+}

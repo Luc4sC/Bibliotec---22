@@ -1,7 +1,19 @@
+//APIs Locais
 let UrlAPIBibliotecLocal = "http://localhost:8080/"
 let UrlAPIUsersLocal = "http://localhost:4500/api/users/"
+
+
+//APIs Testes
 let urlTesteAPIBibliotec = "https://tcc-22-teste-api.up.railway.app/"
+let urlTesteAPIUsers = "https://bibliotecusers-testeapi.up.railway.app/api/users/"
+
+//APIs definitivas
+let urlAPIBibliotec = "https://tcc-22-production.up.railway.app/"
 let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
+
+//URLs
+let urlBibliotec = urlAPIBibliotec
+let urlUsers = urlAPIUsers
 
 function get(url) {
     let request = new XMLHttpRequest()
@@ -12,9 +24,7 @@ function get(url) {
 }
 
 function getGeneros(){
-    
-    // buscaGeneros = get("http://localhost:8080/genero/buscar")
-    buscaGeneros = get("tcc-22-teste-api.up.railway.app/genero/buscar")
+    buscaGeneros = get(encodeURI(urlBibliotec) + encodeURI("genero/buscar"))
  
     //Transforma JSON para JS
     generos = JSON.parse(buscaGeneros);
@@ -85,14 +95,13 @@ function limparTabela() {
 
 function criarBodyGenero(){
     event.preventDefault()
-    rm = localStorage.getItem("rm")
-    
-    // let url = "http://localhost:8080/genero/cadastrar/" + encodeURI(rm)
-    let url = "tcc-22-teste-api.up.railway.app/genero/cadastrar/" + encodeURI(rm)
+    rm = sessionStorage.getItem("rm")
+
+    let url = encodeURI(urlBibliotec) + encodeURI("genero/cadastrar/") + encodeURI(rm)
 
     let nome = document.getElementById("nomeGenero").value;
 
-    console.log(nome)
+    // console.log(nome)
 
     body = {"nomeGenero" : nome}
 
@@ -106,7 +115,7 @@ function postGenero(url, body){
     request.send(JSON.stringify(body))
 
     request.onload = function(){
-        console.log(this.responseText)
+        // console.log(this.responseText)
         alert(this.responseText)
 
         limparTabela();
@@ -117,17 +126,16 @@ function postGenero(url, body){
 }
 
 function deleteGenero(nomeGenero){
-    rm = localStorage.getItem("rm")
-    
-    // let url = "http://localhost:8080/genero/deletar/" + encodeURIComponent(nomeGenero) + "/" + encodeURI(rm)
-    let url = "tcc-22-teste-api.up.railway.app/genero/deletar/" + encodeURIComponent(nomeGenero) + "/" + encodeURI(rm)
+    rm = sessionStorage.getItem("rm")
+
+    let url = encodeURI(urlBibliotec) + encodeURI("genero/deletar/") + encodeURIComponent(nomeGenero) + "/" + encodeURI(rm)
 
     let request = new XMLHttpRequest()
     request.open("DELETE", url)
     request.send()
 
     request.onload = function(){
-        console.log(this.responseText)
+        // console.log(this.responseText)
         alert(this.responseText)
 
         limparTabela();
@@ -141,3 +149,9 @@ function deleteGenero(nomeGenero){
 document.addEventListener("DOMContentLoaded", function() {
     getGeneros();
 });
+
+var usuarioLogado = sessionStorage.getItem('usuarioLogado');
+
+if (!usuarioLogado) {
+    window.location.href = 'index.html';
+}
