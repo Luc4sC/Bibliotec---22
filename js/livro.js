@@ -280,7 +280,7 @@ function criarLinha(livro){
 function deleteLivro(isbn){
   rm = sessionStorage.getItem("rm")
 
-  let url = encodeURI(urlBibliotec) + encodeURI("livro/deletar/") + encodeURI(isbn) + "/" + encodeURI(rm)
+  let url = urlBibliotec + encodeURI("livro/deletar/") + encodeURI(isbn) + "/" + encodeURI(rm)
 
   let request = new XMLHttpRequest()
   request.open("DELETE", url)
