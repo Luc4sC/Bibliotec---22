@@ -283,7 +283,7 @@ function deleteLivro(isbn){
   let url = encodeURI(urlBibliotec) + encodeURI("livro/deletar/") + encodeURI(isbn) + "/" + encodeURI(rm)
 
   let request = new XMLHttpRequest()
-  request.open("DELETE", url + encodeURIComponent(isbn))
+  request.open("DELETE", url)
   request.send()
 
   request.onload = function(){
