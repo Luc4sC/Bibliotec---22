@@ -12,7 +12,7 @@ let urlAPIBibliotec = "https://tcc-22-production.up.railway.app/"
 let urlAPIUsers = "https://bibliotecusers-production.up.railway.app/api/users/" 
 
 //URLs
-let urlBibliotec = urlAPIBibliotec
+let urlBibliotec = urlTesteAPIBibliotec
 let urlUsers = urlAPIUsers
 
 function imagemBase64(input, callback) {
